@@ -1,0 +1,1 @@
+O AliançaApis é uma plataforma de monitoramento inteligente voltada para a preservação das abelhas e a otimização da produção apícola. O projeto une tecnologia de análise de dados com a biologia das colmeias para garantir que esses polinizadores essenciais prosperem em um ambiente seguro e controlado.
