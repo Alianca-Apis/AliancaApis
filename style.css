@@ -1,0 +1,114 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+DK+Uloopet+Guides&display=swap');
+</style>
+
+
+* {
+    width:0 ;
+    height:0 ;
+    margin: 0;
+    padding: 0;
+    background-color: 0;
+    border-color: 0;
+    border-radius: 0;
+}
+
+html,body {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+header{
+    background-color: rgb(255, 255, 168);
+    padding:05px 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-header {
+    color: rgb(57, 0, 83);
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
+
+.icons-header img {
+   width: 50px;           /* Tamanho da largura */
+    height: 50px;          /* Altura igual à largura para ser um quadrado perfeito */
+    object-fit: cover;     /* Garante que a imagem não fique esticada */
+    border-radius: 50%;    /* O segredo para ficar redonda */
+    border: 2px solid rgb(57, 0, 83);
+    margin:0 8px;
+}
+
+.icons-header {
+    margin-left: 10px;
+}
+
+.icons-header svg{
+    margin:0 10;
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: white;
+}
+.sidebar h3{
+    color: rgb(100, 4, 124);
+    font-size: 20px;
+    margin: 10px;
+}
+.sidebar a{
+    display: block;
+    text-decoration: none;
+    padding:10px 15px;
+    color: rgb(57, 0, 83);
+}
+.sidebar a > svg {
+    color: rgb(57, 0, 83);
+}
+.sidebar a.sidebar-active {
+    border-left: 5px solid #58541c;
+    background-color:rgb(197, 180, 202);
+    color: #58541c;
+    font-weight:bold;
+}
+.sidebar a.sidebar-active svg {
+    color: rgb(57, 0, 83);
+  
+}
+.content {
+    width: 80%;
+    background-color: rgb(245,245,245);
+}
+.logo {
+    margin-top: 15px;
+}
+.icons-header {
+     margin-top: 15px;
+}
+.logo h3 {
+    cursor: pointer;
+}
+.logo h3:hover {
+    opacity:0.7;
+}
+.icons-header svg {
+    cursor: pointer;
+}
+.icons-header svg :hover{
+    opacity:0.7;
+}
