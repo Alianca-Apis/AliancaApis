@@ -18,7 +18,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 3%;
-    background-color: yellow;
+    background-image: url(imgs/colmeia.png);
+    background-size: contain;
 }
 
 .navbar nav ul {
@@ -78,6 +79,8 @@ button {
     align-items: center;
     padding: 25px 3%;
     gap: 25px;
+    background-image: url(imgs/bg_halftone.png);
+    background-size: contain;
 }
 
 .principal-content { flex: 1; }
@@ -147,7 +150,7 @@ button {
 
 .sub-img {
     position: absolute;
-    height: 50%;
+    height:60%;
     width: 50%;
     left: 60px;
     bottom: 100px;
@@ -161,6 +164,11 @@ button {
     align-items: center;
     padding: 100px 3%;
     gap: 80px;
+    background-image: url(imgs/colmeiaGrande.png);
+    background-size: contain;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    padding: 50px;
 }
 
 .sobre-img img {
@@ -214,7 +222,7 @@ footer{
     display: flex;
     justify-content: space-around;
     background-color: #9a6e2a;
-    height: 35vh;
+    height: 300px;
     padding: 20px;
 }
 
@@ -240,7 +248,8 @@ footer{
 }
 
 .logo-footer{
-    padding-top: 3vh;
+    padding-top: 30px;
+    height: 300px;
 }
 
 .copyright{
