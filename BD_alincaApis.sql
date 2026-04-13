@@ -1,4 +1,7 @@
-CREATE DATABASE aliancaApis; 
+CREATE USER 'user_apisinsert' IDENTIFIED BY 'urubu100';
+GRANT INSERT ON aliancaapis.tbleitura TO 'user_apisinsert';
+
+CREATE DATABASE IF NOT EXISTS aliancaApis; 
 USE aliancaApis; 
 
 CREATE TABLE tbEndereco( 
@@ -18,11 +21,6 @@ CREATE TABLE tbApicultor(
     emailApicultor VARCHAR(100),
     idEndereco INT,
     FOREIGN KEY (idEndereco) REFERENCES tbEndereco(idEndereco)
-); 
-
-CREATE TABLE tbServico( 
-    idServico INT PRIMARY KEY AUTO_INCREMENT, 
-    nomeServico VARCHAR (50) 
 ); 
 
 CREATE TABLE tbPedido( 
@@ -63,6 +61,8 @@ CREATE TABLE tbAlerta(
     idSensor INT,
     FOREIGN KEY (idSensor) REFERENCES tbSensor(idSensor)
 );
+
+-- Selects para verificação de dados:
 
 -- Lista todos os apicultores, mostrando apenas nome e e-mail
 SELECT nomeApicultor, emailApicultor 
