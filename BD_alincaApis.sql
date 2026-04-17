@@ -5,38 +5,42 @@ CREATE DATABASE IF NOT EXISTS aliancaApis;
 USE aliancaApis; 
 
 CREATE TABLE tbEndereco( 
-    idEndereco INT PRIMARY KEY AUTO_INCREMENT, 
-    logradouroEndereco VARCHAR (100), 
-    numeroEndereco VARCHAR (20), 
-    cidadeEndereco VARCHAR (40), 
-    ufEndereco VARCHAR (20), 
-    paisEndereco VARCHAR (50) 
+	idEndereco INT PRIMARY KEY,
+    cep CHAR(8) NOT NULL,
+    logradouro VARCHAR(255) NOT NULL, 
+    bairro VARCHAR(100) NOT NULL, 
+    cidade VARCHAR(100) NOT NULL,
+    uf VARCHAR(50) NOT NULL
 ); 
 
-CREATE TABLE tbApicultor( 
-    idApicultor INT PRIMARY KEY AUTO_INCREMENT, 
-    nomeApicultor VARCHAR (50), 
+CREATE TABLE tbEmpresa(
+    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+    razaoSocial VARCHAR(255) NOT NULL,
+    nomeFantasia VARCHAR(255) NOT NULL,
+    cnpj CHAR(14) NOT NULL,
+    cdgAtivacao CHAR(5)  NOT NULL,
+    fkEndereco INT NOT NULL,
+    complemento VARCHAR(100),
+    numeroEnd INT NOT NULL,
+    FOREIGN KEY (fkEndereco) REFERENCES tbEndereco(idEndereco)
+);
+
+CREATE TABLE tbUsuario( 
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT, 
+    nome VARCHAR (50), 
     datanasc DATE, 
-    cpfApicultor CHAR (11) UNIQUE,
-    emailApicultor VARCHAR(100),
-    idEndereco INT,
-    FOREIGN KEY (idEndereco) REFERENCES tbEndereco(idEndereco)
-); 
-
-CREATE TABLE tbPedido( 
-    idPedido INT PRIMARY KEY AUTO_INCREMENT, 
-    nomePedido VARCHAR (50),
-    idApicultor INT,
-    idServico INT,
-    FOREIGN KEY (idApicultor) REFERENCES tbApicultor(idApicultor),
-    FOREIGN KEY (idServico) REFERENCES tbServico(idServico)
+    cpf CHAR (11) UNIQUE,
+    senha VARCHAR(50),
+    email VARCHAR(100),
+    fkEmpresa INT,
+    CONSTRAINT fk_endereco FOREIGN KEY (fkEmpresa) REFERENCES tbEmpresa(idEmpresa)
 ); 
 
 CREATE TABLE tbColmeias( 
     idColmeia INT PRIMARY KEY AUTO_INCREMENT, 
     identificacaoColmeia VARCHAR (40),
-    idApicultor INT,
-    FOREIGN KEY (idApicultor) REFERENCES tbApicultor(idApicultor)
+    idEmpresa INT,
+    FOREIGN KEY (idEmpresa) REFERENCES tbEmpresa(idEmpresa)
 ); 
 
 CREATE TABLE tbSensor( 
@@ -58,8 +62,8 @@ CREATE TABLE tbAlerta(
     idAlerta INT PRIMARY KEY AUTO_INCREMENT, 
     descricaoAlerta VARCHAR(100), 
     dataHora DATETIME,
-    idSensor INT,
-    FOREIGN KEY (idSensor) REFERENCES tbSensor(idSensor)
+    idLeitura INT,
+    FOREIGN KEY (idLeitura) REFERENCES tbLeitura(idLeitura)
 );
 
 -- Selects para verificação de dados:
