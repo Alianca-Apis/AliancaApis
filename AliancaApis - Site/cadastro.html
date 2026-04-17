@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliança Apis | Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./assets/imgs/logo-principal.png">
+</head>
+
+<style>
+    body {
+        background-image: url('./assets/imgs/bg_halftone.png');
+        background-repeat: repeat; 
+        background-size: auto;
+        background-attachment: fixed;
+    }
+    
+</style>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Simulação</a></li>
+            </ul>
+        </nav>
+        <button class="btn_principalMarrom" onclick="">Acesse agora</button>
+    </header>
+
+    <div class="loginContainer">
+        <div>
+            <h2>Cadastro</h2>
+            <div>
+                <input type="text" id="ipt_email" placeholder="Email:">
+            </div>
+            <div>
+                <input type="text" id="ipt_cpf" placeholder="CPF:">
+            </div>
+            <div>
+                <input type="text" id="ipt_nome" placeholder="Nome:">
+            </div>
+            <div>
+                <input type="text" id="ipt_senha" placeholder="Senha:">
+            </div>
+            <div>
+                <input type="text" id="ipt_confirmacaoSenha" placeholder="Confirme sua senha:">
+            </div>
+
+            <button onclick="cadastrar()" class="btn_principalMarrom">Cadastrar</button>
+            <div id="div_erro"><span></span></div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
+
+<script src="script.js"></script>
+
+<script>
+</script>
