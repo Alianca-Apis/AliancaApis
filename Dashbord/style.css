@@ -1,0 +1,296 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+DK+Uloopet+Guides&display=swap');
+</style>
+
+
+/** {
+    width:0 ;
+    height:0 ;
+    margin: 0;
+    padding: 0;
+    background-color: 0;
+    border-color: 0;
+    border-radius: 0;
+}*/
+
+html,body {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+header{
+    background-color: #9a6e2a;
+    padding:05px 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+.info-header {
+    color: #2D0A31;
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
+
+.info-text{
+    
+}
+
+
+
+
+/*icons-header*/
+
+
+.icons-header img {
+   width: 50px;           /* Tamanho da largura */
+    height: 50px;          /* Altura igual à largura para ser um quadrado perfeito */
+    object-fit: cover;     /* Garante que a imagem não fique esticada */
+    border-radius: 50%;    /* O segredo para ficar redonda */
+    border: 2px solid rgb(57, 0, 83);
+    margin:0 8px;
+}
+
+.icons-header {
+    margin-left: 10px;
+}
+
+.icons-header svg{
+    margin:0 10;
+}
+
+.icons-header {
+     margin-top: 15px;
+}
+.icons-header svg {
+    cursor: pointer;
+}
+
+.icons-header svg:hover{
+    opacity:0.7;
+}
+
+
+/*main*/
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+
+
+
+
+/*todos os sidebar*/
+.sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: rgb(235, 229, 229);
+}
+.sidebar h3{
+    color: rgb(100, 4, 124);
+    font-size: 20px;
+    margin: 10px;
+}
+.sidebar a{
+    display: block;
+    text-decoration: none;
+    padding:10px 15px;
+    color: rgb(57, 0, 83);
+}
+.sidebar a > svg {
+    color: rgb(57, 0, 83);
+}
+.sidebar a.sidebar-active {
+    border-left: 5px solid #9a6e2a;
+    background-color:#555;
+    color: #9a6e2a;
+    font-weight:bold;
+}
+.sidebar a.sidebar-active svg {
+    color: rgb(57, 0, 83);
+  
+}
+.sidebar a:hover{
+    border-left: 5px solid #9a6e2a;
+    background-color:rgb(197, 180, 202);
+    color: #9a6e2a;
+    font-weight:bold;
+}
+
+/*.sidebar a:hover .sidebar a > svg {
+    color: rgb(57, 0, 83);
+}*/
+
+
+
+
+
+
+.content {
+    width: 80%;
+    background-color: #d6d5d2;
+    padding: 20px;
+}
+
+
+
+
+
+
+
+.logo {
+    margin-top: 15px;
+}
+.logo h3 {
+    cursor: pointer;
+}
+.logo h3:hover {
+    opacity:0.7;
+}
+
+
+
+.titulo-sessão{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px ;
+}
+
+.titulo-sessão h2{
+    font-size: 19px;
+}
+
+.titulo-sessão p{
+    font-size: 14px;
+}
+
+.titulo-sessão i{
+    color:#9a6e2a;
+}
+
+/* se eu não gostar do meu hr e quise mudar no index , vou substiruir o hr por div class= "separador" div.
+e no css eu coloco: 
+.separador{
+width:100%;
+height: 1px;
+background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa quase invisivel}*/
+
+.box-info{
+    width: 100%;
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.box-info-single{
+    display: flex;
+    justify-content: space-between;
+    border-radius:10px;
+    color: white;
+    padding: 30px;
+    width: 80%;
+    margin:0 10px;
+    align-items: center;
+}
+.box-info-single svg{
+    font-size: 28px;
+    display: flex;
+
+}
+
+
+.feed {
+    margin: 10px;
+    width: 98%;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.feed-single {
+    display: flex;
+    justify-content: space-between;
+}
+.feed-text span {
+    color: black;
+}
+/* se que quiser mudar meu icone de cor
+    width: 40px;
+    height: 40px;
+    border-radius: 20px ;
+    background-color: #73b4ff;
+    color: black;
+}*/
+
+.feed-text svg {
+    font-size: 18px;
+    color: #73b4ff;
+    position: absolute;
+    left: 50%;
+
+}
+.feed-text .circle-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: cyan ;
+    position: relative;
+
+}
+.feed-number {
+    color: #444;
+
+}
+
+
+
+
+
+
+.graficos {
+    display: flex;
+    gap: 5vw;
+}
+
+
+.caixa {
+
+    width: 600px;
+    height: 400px;
+    margin:20px auto;
+    padding: 20px;
+    background-color: #e5c27f;
+    border-radius: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: black;
+    
+}
+.caixaa {
+    width: 600px;
+    height: 400px;
+    margin:20px auto;
+    padding: 20px;
+    background-color: #e5c27f;
+    border-radius: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: black;
+    font-size: 20px;
+}
+
+#meugrafico{
+    color: black;
+}

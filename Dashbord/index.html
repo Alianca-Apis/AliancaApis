@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+   <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="info-header">
+            <div class="logo">
+                <h3>Aliança Apis</h3>
+            </div>
+            <div class="logo"> 
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+        <div style="align-items: center;" class="icons-header">  
+            <i class="fa-regular fa-envelope"></i>
+            <i class="fa-regular fa-bell"></i>
+            <img src="abelha1.jpg" alt="">
+        </div>
+    </header>
+
+<!-- FIM HEADER-->
+
+<section class="main">
+    <div class="sidebar">
+        <h3>Home</h3>
+        <a class="sidebar-active" href="#"><i class="fa-solid fa-house"></i>Relatorios</a>
+        <a href="#"><i class="fa-solid fa-house"></i>calculadora</a>
+        <a href="#"><i class="fa-solid fa-house"></i>Perfil</a>
+        <a href="#"><i class="fa-solid fa-house"></i>Mel</a>
+        <br>
+        <hr>
+        <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
+        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
+
+    </div><!-- sidebar-->
+    <div class="content">
+        <div class="titulo-sessão">
+            <h2>Dashbord</h2>
+            <br>
+            <hr>
+            <br>
+            <p><i class="fa-solid fa-house"></i>/Dashbord Apiares</p>
+        </div>
+        
+        <div class="box-info">
+            <div style="background-color: rgba(216, 13, 13, 0.801);" class="box-info-single">
+                <div class="info-text">
+                    <h3>Apiare (7) </h3>
+                    <p>Temperatura atual: 28°C</p>
+                </div>
+                <i class="fa-solid fa-dollar-sign"></i>
+            </div>
+        
+            <div style="background-color: rgba(255, 238, 0, 0.836);" class="box-info-single">
+                <div class="info-text">
+                    <h3>Há uma falha na homeostase</h3>
+                    <p>média 24°C</p>
+                </div>
+                <i class="fa-solid fa-dollar-sign"></i>
+            </div>
+       
+          
+            <div style="background-color: rgba(20, 252, 32, 0.733);" class="box-info-single">
+                <div class="info-text">
+                    <h3> </h3>
+                    <p></p>
+                </div>
+                <i class="fa-solid fa-dollar-sign"></i>
+            </div>
+        </div>
+        
+        
+        <div class="feed">
+           <div class="feed-single">
+                <div class="feed-text">
+                   <div class="circle-icons"><i class="fa-regular fa-bell"></i>
+                        <span>Migratoria</span> 
+                    </div>
+                </div> 
+                <div class="feed-number">
+                     <h3>30 especies</h3>
+                </div>
+           </div>
+
+        </div>
+
+        <!--graficos-->
+        <div class="graficos">
+            <div class="caixa">
+                <center>
+                <h1>Temperatura<br>
+                Apiário</h1>
+                <h1 id="ipt_h1"></h1>
+                </center>
+                <canvas id="meugrafico"></canvas>
+            </div>
+            <div class="caixaa">
+                <center>
+                <h2> Apiários <br>
+                 Desta hora!</h2>
+                </center>
+                <canvas id="meugraficobarras"></canvas>
+            </div>
+        </div>
+        
+        <p>Selecione um Apiário</p>
+        <input type="text" id="ipt_texto">
+        <button onclick="mostrar()">Selecionar</button>
+        
+
+    </div><!--content -->
+</section> <!--main-->
+
+</body>
+</html>
+<script>
+
+function mostrar() {
+        let texto = ipt_texto.value;
+
+        ipt_h1.innerHTML = `${texto}`
+}
+
+    let tudo = document.getElementById("meugrafico");
+    let barra = document.getElementById("meugraficobarras");
+    
+   new Chart()
+
+     new Chart(tudo, {
+    type: 'line',
+    data: {
+      labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00','07:00','08:00','09:00','10:00','11:00','12:00'],
+      datasets: [{
+        backgroundColor: '#2D0A31',
+        label: '# of Votes',
+        data: ['34', '36', '33','28 ','23 ','17 ','15 ','10 ', '12','16','20','22','18'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+    color: 'black',
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  }
+ );
+
+   new Chart(barra, {
+    type: 'bar',
+    data: {
+      labels: ['Api1', 'Api2', 'Api3', 'Api4','Api5', 'Api6', 'Api7', 'Api8', 'Api9', 'Api10', 'Api11' , 'Api12'],
+      datasets: [{
+        backgroundColor: '#2D0A31',
+        label: '# of Votes',
+        data: [23,26,22,24,30,27,34,22,20,25,30,35,28],
+        borderWidth: 1
+      }]
+    },
+    options: {
+    color: 'black',
+      scales: {
+            color: 'black',
+
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+   
+
+</script>
