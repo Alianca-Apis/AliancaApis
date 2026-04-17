@@ -16,6 +16,7 @@ function cadastrar() {
     let confirmacaoSenha = ipt_confirmacaoSenha.value;
 
     let condicoesErro = [
+        nome == "" || cpf == "" || email == "" || senha == "" || confirmacaoSenha == "",
         nome == "" || nome.length <= 1,
         cpf.length !== 11,
         !email.includes("@"),
@@ -24,11 +25,12 @@ function cadastrar() {
     ];
 
     let mensagensErro = [
-        "Nome inválido!",
-        "CPF deve ter 11 dígitos!",
+        "Todos campos são obrigatórios",
+        "Nome inválido",
+        "CPF deve ter 11 dígitos",
         "E-mail deve conter @",
-        "Senha muito curta (mínimo 6)!",
-        "Senhas não coincidem!"
+        "Senha muito curta (mínimo 6)",
+        "Senhas não coincidem"
     ];
 
     for (let i = 0; i < condicoesErro.length; i++) {
