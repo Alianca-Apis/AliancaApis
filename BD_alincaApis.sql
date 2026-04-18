@@ -1,121 +1,120 @@
-CREATE USER 'user_apisinsert' IDENTIFIED BY 'urubu100';
-GRANT INSERT ON aliancaapis.tbleitura TO 'user_apisinsert';
+CREATE DATABASE IF NOT EXISTS aliancaapis;
+USE aliancaapis;
 
-CREATE DATABASE IF NOT EXISTS aliancaApis; 
-USE aliancaApis; 
-
-CREATE TABLE tbEndereco( 
-	idEndereco INT PRIMARY KEY,
-    cep CHAR(8) NOT NULL,
-    logradouro VARCHAR(255) NOT NULL, 
-    bairro VARCHAR(100) NOT NULL, 
-    cidade VARCHAR(100) NOT NULL,
-    uf VARCHAR(50) NOT NULL
-); 
+CREATE TABLE tbEndereco(
+  idEndereco INT NOT NULL,
+  cep CHAR(8) NOT NULL,
+  logradouro VARCHAR(255) NOT NULL,
+  bairro VARCHAR(100) NOT NULL,
+  cidade VARCHAR(100) NOT NULL,
+  uf CHAR(2) NOT NULL,
+  numero INT NOT NULL,
+  complemento VARCHAR(255) NULL,
+  PRIMARY KEY (idEndereco));
+  
 
 CREATE TABLE tbEmpresa(
-    idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
-    razaoSocial VARCHAR(255) NOT NULL,
-    nomeFantasia VARCHAR(255) NOT NULL,
-    cnpj CHAR(14) NOT NULL,
-    cdgAtivacao CHAR(5)  NOT NULL,
-    fkEndereco INT NOT NULL,
-    complemento VARCHAR(100),
-    numeroEnd INT NOT NULL,
-    FOREIGN KEY (fkEndereco) REFERENCES tbEndereco(idEndereco)
-);
+  idEmpresa INT NOT NULL AUTO_INCREMENT,
+  razaoSocial VARCHAR(255) NOT NULL,
+  nomeFantasia VARCHAR(255) NOT NULL,
+  cnpj CHAR(14) NOT NULL,
+  cdgAtivacao CHAR(5) NOT NULL,
+  fkEndereco INT NOT NULL,
+  PRIMARY KEY (idEmpresa),
+  CONSTRAINT fkEnd FOREIGN KEY (fkEndereco)
+  REFERENCES tbendereco (idEndereco));
 
-CREATE TABLE tbUsuario( 
-    idUsuario INT PRIMARY KEY AUTO_INCREMENT, 
-    nome VARCHAR (50), 
-    datanasc DATE, 
-    cpf CHAR (11) UNIQUE,
-    senha VARCHAR(50),
-    email VARCHAR(100),
-    fkEmpresa INT,
-    CONSTRAINT fk_endereco FOREIGN KEY (fkEmpresa) REFERENCES tbEmpresa(idEmpresa)
-); 
+CREATE TABLE tbColmeias(
+  idColmeia INT NOT NULL AUTO_INCREMENT,
+  identificacaoColmeia VARCHAR(40),
+  idEmpresa INT,
+  PRIMARY KEY (idColmeia),
+  CONSTRAINT fkEmp FOREIGN KEY (idEmpresa)
+    REFERENCES tbempresa(idEmpresa));
 
-CREATE TABLE tbColmeias( 
-    idColmeia INT PRIMARY KEY AUTO_INCREMENT, 
-    identificacaoColmeia VARCHAR (40),
-    idEmpresa INT,
-    FOREIGN KEY (idEmpresa) REFERENCES tbEmpresa(idEmpresa)
-); 
+CREATE TABLE tbSensor(
+  idSensor INT NOT NULL AUTO_INCREMENT,
+  tipoSensor VARCHAR(40),
+  idColmeia INT,
+  PRIMARY KEY (idSensor),
+  CONSTRAINT fkCol FOREIGN KEY (idColmeia)
+  REFERENCES tbcolmeias (idColmeia));
 
-CREATE TABLE tbSensor( 
-    idSensor INT PRIMARY KEY AUTO_INCREMENT, 
-    tipoSensor VARCHAR (40),
-    idColmeia INT,
-    FOREIGN KEY (idColmeia) REFERENCES tbColmeias(idColmeia)
-); 
+CREATE TABLE tbLeitura(
+  idLeitura INT NOT NULL AUTO_INCREMENT,
+  valorLeitura FLOAT,
+  dataHora DATETIME,
+  fkSensor INT NOT NULL,
+  PRIMARY KEY (idLeitura, fkSensor),
+  CONSTRAINT fkSen FOREIGN KEY (fkSensor)
+  REFERENCES tbsensor(idSensor));
 
-CREATE TABLE tbLeitura( 
-    idLeitura INT PRIMARY KEY AUTO_INCREMENT, 
-    valorLeitura FLOAT, 
-    dataHora DATETIME,
-    idSensor INT,
-    FOREIGN KEY (idSensor) REFERENCES tbSensor(idSensor)
-); 
+CREATE TABLE tbAlerta(
+  idAlerta INT NOT NULL AUTO_INCREMENT,
+  descricaoAlerta VARCHAR(100),
+  dataHora DATETIME,
+  fkLeitura INT NOT NULL,
+  PRIMARY KEY (idAlerta, fkLeitura),
+  CONSTRAINT fkLei FOREIGN KEY (fkLeitura)
+  REFERENCES tbleitura (idLeitura));
 
-CREATE TABLE tbAlerta( 
-    idAlerta INT PRIMARY KEY AUTO_INCREMENT, 
-    descricaoAlerta VARCHAR(100), 
-    dataHora DATETIME,
-    idLeitura INT,
-    FOREIGN KEY (idLeitura) REFERENCES tbLeitura(idLeitura)
-);
+CREATE TABLE tbUsuario(
+  idUsuario INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(50),
+  datanasc DATE,
+  cpf CHAR(11) UNIQUE,
+  senha VARCHAR(50),
+  email VARCHAR(100),
+  fkEmpresa INT NOT NULL,
+  PRIMARY KEY (idUsuario, fkEmpresa),
+  CONSTRAINT fkEmp2 FOREIGN KEY (fkEmpresa)
+  REFERENCES tbempresa (idEmpresa));
 
--- Selects para verificação de dados:
 
--- Lista todos os apicultores, mostrando apenas nome e e-mail
-SELECT nomeApicultor, emailApicultor 
-FROM tbApicultor;
+-- Lista todos os usuários (antigos apicultores), mostrando apenas nome e e-mail
+SELECT nome, email 
+FROM tbUsuario;
 
--- Lista todos os serviços cadastrados em ordem alfabética
-SELECT idServico, nomeServico 
-FROM tbServico 
-ORDER BY nomeServico ASC;
+-- Lista todas as empresas (antigas 'serviços') cadastradas em ordem alfabética
+SELECT idEmpresa, nomeFantasia 
+FROM tbEmpresa 
+ORDER BY nomeFantasia ASC;
 
--- Buscar colmeias que pertencem ao apicultor de ID 1
+-- Buscar colmeias que pertencem à empresa de ID 1
 SELECT idColmeia, identificacaoColmeia 
 FROM tbColmeias 
-WHERE idApicultor = 1;
+WHERE idEmpresa = 1;
 
--- Mostrar todas as leituras de sensores com valor maior que 40.0
+-- Mostrar todas as leituras de sensores com valor maior que o permitido para colmeias
 SELECT idLeitura, valorLeitura, dataHora 
 FROM tbLeitura 
-WHERE valorLeitura > 40.0;
+WHERE valorLeitura > 36.0;
 
 -- Contar quantos alertas foram registrados no total
 SELECT COUNT(*) AS total_alertas 
 FROM tbAlerta;
 
--- Listar o nome do apicultor junto com a cidade e estado
-SELECT a.nomeApicultor, e.cidadeEndereco, e.ufEndereco
-FROM tbApicultor a
-JOIN tbEndereco e ON a.idEndereco = e.idEndereco;
+-- Listar o nome do usuário junto com a cidade e estado da sua empresa
+SELECT u.nome, e.cidade, e.uf
+FROM tbUsuario u
+JOIN tbEmpresa emp ON u.fkEmpresa = emp.idEmpresa
+JOIN tbEndereco e ON emp.fkEndereco = e.idEndereco;
 
--- Relatório de Pedidos: Mostrar o nome do pedido, o cliente e o serviço
-SELECT p.nomePedido, a.nomeApicultor, s.nomeServico
-FROM tbPedido p
-JOIN tbApicultor a ON p.idApicultor = a.idApicultor
-JOIN tbServico s ON p.idServico = s.idServico;
-
--- Mostrar as colmeias e o nome dos seus respectivos donos
-SELECT c.identificacaoColmeia, a.nomeApicultor
+-- Mostrar as colmeias e o nome da empresa responsável
+SELECT c.identificacaoColmeia, emp.nomeFantasia
 FROM tbColmeias c
-JOIN tbApicultor a ON c.idApicultor = a.idApicultor;
+JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
--- Listar os tipos de sensores instalados, em qual colmeia estão e a quem a colmeia pertence
-SELECT s.tipoSensor, c.identificacaoColmeia, a.nomeApicultor
+-- Listar os tipos de sensores instalados, em qual colmeia estão e a empresa dona
+SELECT s.tipoSensor, c.identificacaoColmeia, emp.nomeFantasia
 FROM tbSensor s
 JOIN tbColmeias c ON s.idColmeia = c.idColmeia
-JOIN tbApicultor a ON c.idApicultor = a.idApicultor;
+JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
--- Histórico de Alertas: Mostrar a descrição do alerta, a data/hora, o tipo de sensor e a identificação da colmeia
+-- Histórico de Alertas: Descrição, data, tipo de sensor e identificação da colmeia
 SELECT al.descricaoAlerta, al.dataHora, s.tipoSensor, c.identificacaoColmeia
 FROM tbAlerta al
-JOIN tbSensor s ON al.idSensor = s.idSensor
+JOIN tbLeitura l ON al.fkLeitura = l.idLeitura
+JOIN tbSensor s ON l.fkSensor = s.idSensor
 JOIN tbColmeias c ON s.idColmeia = c.idColmeia
 ORDER BY al.dataHora DESC;
