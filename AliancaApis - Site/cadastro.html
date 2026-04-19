@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aliança Apis | Cadastro</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./assets/imgs/logo-principal.png">
+    <link rel="icon" href="./assets/imgs/logo_bn.png">
+    <script src="script.js"></script>
 </head>
 
 <style>
     body {
-        background-image: url('./assets/imgs/bg_halftone.png');
-        background-repeat: repeat; 
-        background-size: auto;
-        background-attachment: fixed;
+        background-image:
+            linear-gradient(#f9f6ed7c, #e5e3d681),
+            url('./assets/imgs/imagem2-home.png');
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
-    
 </style>
 
-<body>
+<body class="bodyCadastro">
     <header class="navbar">
         <div class="logo">
             <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
@@ -32,39 +35,67 @@
                 <li><a href="#">Simulação</a></li>
             </ul>
         </nav>
-        <button class="btn_principalMarrom" onclick="">Acesse agora</button>
+        <button class="btn_principalMarrom" onclick="window.location.href = 'login.html'">Acesse agora</button>
     </header>
 
     <div class="loginContainer">
-        <div>
+        <div class="cardLogin">
             <h2>Cadastro</h2>
-            <div>
-                <input type="text" id="ipt_email" placeholder="Email:">
-            </div>
-            <div>
-                <input type="text" id="ipt_cpf" placeholder="CPF:">
-            </div>
-            <div>
-                <input type="text" id="ipt_nome" placeholder="Nome:">
-            </div>
-            <div>
-                <input type="text" id="ipt_senha" placeholder="Senha:">
-            </div>
-            <div>
-                <input type="text" id="ipt_confirmacaoSenha" placeholder="Confirme sua senha:">
+            <div class="detalheLinhaLogin"></div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <span for="ipt_nome">Nome:</span>
+                    <input type="text" id="ipt_nome" placeholder="Ex: João">
+                </div>
+
+                <div class="input-group">
+                    <span for="ipt_sobrenome">Sobrenome:</span>
+                    <input type="text" id="ipt_sobrenome" placeholder="Ex: Silva">
+                </div>
             </div>
 
+            <div class="input-group">
+                <span for="ipt_email">Email:</span>
+                <input type="text" id="ipt_email" placeholder="seu@email.com">
+            </div>
+
+            <div class="input-group">
+                <span for="ipt_cpf">CPF:</span>
+                <input type="text" id="ipt_cpf" placeholder="12345678901">
+            </div>
+
+            <div class="input-group">
+                <span for="ipt_senha">Senha:</span>
+                <input type="password" id="ipt_senha" placeholder="********">
+            </div>
+
+            <div class="input-group">
+                <span for="ipt_confirmacaoSenha">Confirme sua senha:</span>
+                <input type="password" id="ipt_confirmacaoSenha" placeholder="********">
+            </div>
+
+            <div class="input-group">
+                <span for="ipt_confirmacaoCodigo">Código de ativação:</span>
+                <input type="text" id="ipt_confirmacaoCodigo" placeholder="Digite o código de sua empresa   ">
+            </div>
+
+
             <button onclick="cadastrar()" class="btn_principalMarrom">Cadastrar</button>
-            <div id="div_erro"><span></span></div>
+            <a href="login.html" class="">Já tenho conta.</a>
+
+            <div id="div_erro"></div>
         </div>
     </div>
 
-    
+    <div class="copyrightFooterInv">
+        <div class="logoFooter">
+            <img src="./assets/imgs/logo_bn.png">
+        </div>
+
+        <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
+    </div>
+
 </body>
 
 </html>
-
-<script src="script.js"></script>
-
-<script>
-</script>

@@ -4,35 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aliança Apis | Login</title>
+    <title>Aliança Apis | Cadastro</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./assets/imgs/logo-principal.png">
+    <link rel="icon" href="./assets/imgs/logo_bn.png">
+    <script src="script.js"></script>
 </head>
 
 <style>
     body {
-        background-image: url('./assets/imgs/bg_halftone.png');
-        background-repeat: repeat;
-        background-size: auto;
-        background-attachment: fixed;
+        background-image:
+            linear-gradient(#f9f6ed7c, #e5e3d681),
+            url('./assets/imgs/imagem2-home.png');
+
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
-    
 </style>
 
-<body>
+<body class="bodyCadastro">
+    <header class="navbar">
+        <div class="logo">
+            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Simulação</a></li>
+            </ul>
+        </nav>
+        <button class="btn_principalMarrom">Acesse agora</button>
+    </header>
 
     <div class="loginContainer">
-        <div>
+        <div class="cardLogin">
             <h2>Identificação</h2>
-            <div>
+            <div class="detalheLinhaLogin"></div>
+
+            <div class="input-group">
+                <span for="ipt_nome">Email:</span>
                 <input type="text" placeholder="Email:" id="ipt_email">
             </div>
-            <div>
-                <input type="text" placeholder="Senha:" id="ipt_senha">
+
+            <div class="input-group">
+                <span for="ipt_sobrenome">Senha:</span>
+                <input type="password" placeholder="Senha:" id="ipt_senha">
             </div>
+
             <button onclick="entrar()">Entrar</button>
-            <li><a href="cadastro.html">Quero me cadastrar</a></li>
+            <a href="cadastro.html" class="">Quero me cadastrar.</a>
+
+            <div id="div_erro"></div>
         </div>
+    </div>
+
+    <div class="copyrightFooterInv">
+        <div class="logoFooter">
+            <img src="./assets/imgs/logo_bn.png">
+        </div>
+
+        <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
     </div>
 
 </body>

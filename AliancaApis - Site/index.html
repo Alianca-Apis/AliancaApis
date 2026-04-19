@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aliança Apis | Index</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./assets/imgs/logo-principal.png">
+    <link rel="icon" href="./assets/imgs/logo_bn.png">
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body class="bodyIndex">
     <header class="navbar">
         <div class="logo">
             <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
@@ -26,15 +27,20 @@
     </header>
 
     <main>
+
+        <!-- FIRST LOOK -->
+
         <div class="principal">
             <div class="principal-content">
                 <span class="detalhe">SEJA BEM-VINDO A ALIANÇA APIS</span>
                 <h1>Controle de temperatura inteligente para a produção máxima <br> de mel.</h1>
-                <p>Tecnologia IOT projetada para garantir a saúde do seu apiário e evitar <br> perdas imprevistas em colônias
+                <p>Tecnologia IOT projetada para garantir a saúde do seu apiário e evitar <br> perdas imprevistas em
+                    colônias
                     de Apis Mellifera.</p>
                 <div class="principal-btns">
                     <button class="btn_principalMarrom">Descubra a tecnologia</button>
-                    <button class="btn_secundarioCinza" onclick="window.location.href = 'cadastro.html'">Entre em contato</button>
+                    <button class="btn_secundarioCinza" onclick="window.location.href = 'cadastro.html'">Entre em
+                        contato</button>
                 </div>
             </div>
             <div class="principal-images">
@@ -54,6 +60,38 @@
             </div>
         </div>
 
+        <!-- CARDS DE INFORMAÇÃO -->
+
+        <div class="quadroTxtContainer">
+            <div>
+                <h2>Eficiência baseada em dados.</h2>
+            </div>
+
+            <div class="detalheLinhazinha"></div>
+
+            <div class="cardTexto">
+                <div>
+                    <h3>Maximizar a Produção</h3>
+                    <p>Utilizamos algoritmos térmicos avançados para manter o ninho no ponto ideal de produtividade,
+                        garantindo mel de qualidade superior.</p>
+                </div>
+
+                <div>
+                    <h3>Evitar Infortúnios</h3>
+                    <p>Sistema de alerta precoce que identifica anomalias térmicas antes que afetem a saúde da colônia,
+                        mitigando riscos de perda total.</p>
+                </div>
+
+                <div>
+                    <h3>Tecnologia IoT</h3>
+                    <p>Sensores de alta precisão integrados a uma plataforma em nuvem, permitindo o monitoramento em
+                        tempo real de qualquer lugar do mundo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOBRE NÓS -->
+
         <div class="sobre">
             <div class="sobre-img">
                 <img src="./assets/imgs/imagem3-home.png" alt="Colmeia inteligente">
@@ -69,6 +107,50 @@
                 <a href="#" class="link-more">Saiba mais &rarr;</a>
             </div>
         </div>
+
+        <!-- SIMULADOR FINANCEIRO -->
+
+        <div class="loginContainer">
+            <div class="cardLogin">
+                <h2>Simulador Financeiro</h2>
+                <div class="detalheLinhaLogin"></div>
+
+
+                <div class="input-group">
+                    <span for="ipt_quantidade">Quantas colmeias artificiais você possui no seu apiário?</span>
+                    <input type="text" id="ipt_quantidade">
+                </div>
+
+                <div class="input-group">
+                    <span for="ipt_kg">Quantos kilos em média suas abelhas produzem ao ano? (por colmeia)</span>
+                    <input type="text" id="ipt_kg">
+                </div>
+
+
+                <div class="input-group">
+                    <span for="ipt_preco">Por quanto você vendo o kilo do seu mel?</span>
+                    <input type="text" id="ipt_preco">
+                </div>
+
+                <div class="input-group">
+                    <span for="ipt_cpf">Qual é seu custo anual de manutenção por colmeia?</span>
+                    <input type="text" id="ipt_manutencao">
+                </div>
+
+                <div class="input-group">
+                    <span for="ipt_senha">Você já contrata nosso serviço?</span>
+                    <select name="contrato" id="contrata">
+                        <option value="s">SIM</option>
+                        <option value="n">NÃO</option>
+                    </select>
+                </div>
+
+                <button onclick="calculo()">CALCULAR</button>
+
+                <div id="divMsg"></div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="principal">
