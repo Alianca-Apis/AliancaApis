@@ -274,6 +274,68 @@ button {
     height: 100px;
 }
 
+.simuladorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Ele flutua sobre a página */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1; /* Fica atrás do header se o header tiver z-index maior */
+}
+
+.cardSimulador {
+    background-color: #E5E3D6;
+    border-radius: 16px;
+    padding: 25px 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    box-shadow: 0px 4px 10px #00000040;
+
+    transform: scale(0.85);
+}
+
+.cardSimulador input{
+    border-radius: 6px;
+    height: 3vh;
+    border: 1px solid #865D1D
+}
+
+.cardSimulador h2{
+    align-self: center;
+}
+
+.corpo-simulador {
+    display: flex;
+    flex-direction: row; 
+    gap: 40px;          
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.coluna-inputs, .coluna-resultado {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.coluna-resultado {
+    border-left: 2px solid #865D1D; 
+    padding-left: 30px;
+    text-align: left;
+}
+
+#contrata{
+    border-radius: 6px;
+    border-left: 2px solid #865D1D;
+}
+
 .sobre {
     display: flex;
     align-items: center;

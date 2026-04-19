@@ -19,10 +19,10 @@ function cadastrar() {
     let condicoesErro = [
         nome == "" || cpf == "" || email == "" || senha == "" || confirmacaoSenha == "",
         nome == "" || nome.length <= 1,
-        cpf.length !== 11,
+        cpf.length != 11,
         !email.includes("@"),
         senha.length < 6,
-        confirmacaoSenha !== senha,
+        confirmacaoSenha != senha,
     ];
 
     let mensagensErro = [

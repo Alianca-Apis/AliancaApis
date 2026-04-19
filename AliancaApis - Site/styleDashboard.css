@@ -45,7 +45,10 @@ header{
 }
 
 
-
+a{
+    text-decoration: none;
+    color: #2D0A31;
+}
 
 /*icons-header*/
 

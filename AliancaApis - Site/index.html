@@ -20,7 +20,6 @@
                 <li><a href="#" class="active">Início</a></li>
                 <li><a href="#">Sobre Nós</a></li>
                 <li><a href="#">FAQ</a></li>
-                <li><a href="simulador.html">Simulação</a></li>
             </ul>
         </nav>
         <button class="btn_principalMarrom" onclick="window.location.href = 'login.html'">Acesse agora</button>
@@ -110,45 +109,43 @@
 
         <!-- SIMULADOR FINANCEIRO -->
 
-        <div class="loginContainer">
-            <div class="cardLogin">
-                <h2>Simulador Financeiro</h2>
-                <div class="detalheLinhaLogin"></div>
+        <div class="cardSimulador">
+            <h2>Simulador Financeiro</h2>
+            <div class="detalheLinhaLogin"></div>
 
-
-                <div class="input-group">
-                    <span for="ipt_quantidade">Quantas colmeias artificiais você possui no seu apiário?</span>
-                    <input type="text" id="ipt_quantidade">
+            <div class="corpo-simulador">
+                
+                <div class="coluna-inputs">
+                    <div class="input-group">
+                        <span for="ipt_quantidade">Quantas colmeias artificiais você possui no seu apiário?</span>
+                        <input type="text" id="ipt_quantidade">
+                    </div>
+                    <div class="input-group">
+                        <span for="ipt_kg">Quantos kilos em média suas abelhas produzem ao ano? (por colmeia)</span>
+                        <input type="text" id="ipt_kg">
+                    </div>
+                    <div class="input-group">
+                        <span for="ipt_preco">Por quanto você vendo o kilo do seu mel?</span>
+                        <input type="text" id="ipt_preco">
+                    </div>
+                    <div class="input-group">
+                        <span for="ipt_manutencao">Qual é seu custo anual de manutenção por colmeia?</span>
+                        <input type="text" id="ipt_manutencao">
+                    </div>
+                    <div class="input-group">
+                        <span>Você já contrata nosso serviço?</span>
+                        <select id="contrata">
+                            <option value="s">SIM</option>
+                            <option value="n">NÃO</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <span for="ipt_kg">Quantos kilos em média suas abelhas produzem ao ano? (por colmeia)</span>
-                    <input type="text" id="ipt_kg">
+                <div id="divMsg" class="coluna-resultado">
                 </div>
-
-
-                <div class="input-group">
-                    <span for="ipt_preco">Por quanto você vendo o kilo do seu mel?</span>
-                    <input type="text" id="ipt_preco">
-                </div>
-
-                <div class="input-group">
-                    <span for="ipt_cpf">Qual é seu custo anual de manutenção por colmeia?</span>
-                    <input type="text" id="ipt_manutencao">
-                </div>
-
-                <div class="input-group">
-                    <span for="ipt_senha">Você já contrata nosso serviço?</span>
-                    <select name="contrato" id="contrata">
-                        <option value="s">SIM</option>
-                        <option value="n">NÃO</option>
-                    </select>
-                </div>
-
-                <button onclick="calculo()">CALCULAR</button>
-
-                <div id="divMsg"></div>
             </div>
+
+            <button onclick="calculo()" style="font-size: 16px;">CALCULAR</button>
         </div>
 
     </main>
