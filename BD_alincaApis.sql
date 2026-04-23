@@ -24,21 +24,21 @@ CREATE TABLE tbEmpresa(
   CONSTRAINT fkEnd FOREIGN KEY (fkEndereco)
   REFERENCES tbendereco (idEndereco));
 
-CREATE TABLE tbColmeias(
-  idColmeia INT NOT NULL AUTO_INCREMENT,
-  identificacaoColmeia VARCHAR(40),
+CREATE TABLE tbApiario(
+  idApiario INT NOT NULL AUTO_INCREMENT,
+  identificacaoApiario VARCHAR(40),
   idEmpresa INT,
-  PRIMARY KEY (idColmeia),
+  PRIMARY KEY (idApiario),
   CONSTRAINT fkEmp FOREIGN KEY (idEmpresa)
     REFERENCES tbempresa(idEmpresa));
 
 CREATE TABLE tbSensor(
   idSensor INT NOT NULL AUTO_INCREMENT,
   tipoSensor VARCHAR(40),
-  idColmeia INT,
+  idApiario INT,
   PRIMARY KEY (idSensor),
-  CONSTRAINT fkCol FOREIGN KEY (idColmeia)
-  REFERENCES tbcolmeias (idColmeia));
+  CONSTRAINT fkCol FOREIGN KEY (idApiario)
+  REFERENCES tbApiario (idApiario));
 
 CREATE TABLE tbLeitura(
   idLeitura INT NOT NULL AUTO_INCREMENT,
@@ -81,8 +81,8 @@ FROM tbEmpresa
 ORDER BY nomeFantasia ASC;
 
 -- Buscar colmeias que pertencem à empresa de ID 1
-SELECT idColmeia, identificacaoColmeia 
-FROM tbColmeias 
+SELECT idApiario, identificacaoApiario 
+FROM tbApiario 
 WHERE idEmpresa = 1;
 
 -- Mostrar todas as leituras de sensores com valor maior que o permitido para colmeias
@@ -101,20 +101,20 @@ JOIN tbEmpresa emp ON u.fkEmpresa = emp.idEmpresa
 JOIN tbEndereco e ON emp.fkEndereco = e.idEndereco;
 
 -- Mostrar as colmeias e o nome da empresa responsável
-SELECT c.identificacaoColmeia, emp.nomeFantasia
-FROM tbColmeias c
+SELECT c.identificacaoApiario, emp.nomeFantasia
+FROM tbApiario c
 JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
 -- Listar os tipos de sensores instalados, em qual colmeia estão e a empresa dona
-SELECT s.tipoSensor, c.identificacaoColmeia, emp.nomeFantasia
+SELECT s.tipoSensor, c.identificacaoApiario, emp.nomeFantasia
 FROM tbSensor s
-JOIN tbColmeias c ON s.idColmeia = c.idColmeia
+JOIN tbApiario c ON s.idApiario = c.idApiario
 JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
 -- Histórico de Alertas: Descrição, data, tipo de sensor e identificação da colmeia
-SELECT al.descricaoAlerta, al.dataHora, s.tipoSensor, c.identificacaoColmeia
+SELECT al.descricaoAlerta, al.dataHora, s.tipoSensor, c.identificacaoApiario
 FROM tbAlerta al
 JOIN tbLeitura l ON al.fkLeitura = l.idLeitura
 JOIN tbSensor s ON l.fkSensor = s.idSensor
-JOIN tbColmeias c ON s.idColmeia = c.idColmeia
+JOIN tbApiario c ON s.idApiario = c.idApiario
 ORDER BY al.dataHora DESC;

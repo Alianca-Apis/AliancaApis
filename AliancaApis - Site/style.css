@@ -33,7 +33,7 @@
     line-height: 1.6;
     margin: 0;
     font-weight: 400;
-    padding-top: 100px;
+    padding-top: 70px;
 }
 
 .bodyCadastro {
@@ -43,8 +43,7 @@
     line-height: 1.6;
     margin: 0;
     font-weight: 400;
-    padding-top: 25px;
-    padding-bottom: 0px
+    padding-top: 70px;
 }
 
 h1,
@@ -97,18 +96,18 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1px 5%;
+    padding: 0 5%;
     
     position: fixed;    
-    top: 0;             
+    top: 0;
+    height: 70px;        
     left: 0;            
-    width: 100%;        
+    width: 100%;      
     z-index: 1000;      
 
     background-color: #f9f6edc5; 
     background-image: url(./assets/imgs/colmeia.png);
     background-size: contain;
-    background-repeat: no-repeat;
     
     backdrop-filter: blur(10px); 
 
@@ -143,15 +142,15 @@ button {
 /* LOGO HEADER */
 
 .logo {
-    height: 8vh;
+    height: 50px;
     display: flex;          
     justify-content: center; 
     align-items: center;  
 }
 
 .logo img {
-    height: 80%;
-    width: 100%;
+    height: 100%;
+    width: auto;
 }
 
 /* LOGO FOOTER */
