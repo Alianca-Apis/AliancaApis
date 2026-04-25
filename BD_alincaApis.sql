@@ -22,7 +22,7 @@ CREATE TABLE tbEmpresa(
   fkEndereco INT NOT NULL,
   PRIMARY KEY (idEmpresa),
   CONSTRAINT fkEnd FOREIGN KEY (fkEndereco)
-  REFERENCES tbendereco (idEndereco));
+  REFERENCES tbEndereco (idEndereco));
 
 CREATE TABLE tbApiario(
   idApiario INT NOT NULL AUTO_INCREMENT,
@@ -30,11 +30,10 @@ CREATE TABLE tbApiario(
   idEmpresa INT,
   PRIMARY KEY (idApiario),
   CONSTRAINT fkEmp FOREIGN KEY (idEmpresa)
-    REFERENCES tbempresa(idEmpresa));
+    REFERENCES tbEmpresa(idEmpresa));
 
 CREATE TABLE tbSensor(
   idSensor INT NOT NULL AUTO_INCREMENT,
-  tipoSensor VARCHAR(40),
   idApiario INT,
   PRIMARY KEY (idSensor),
   CONSTRAINT fkCol FOREIGN KEY (idApiario)
@@ -47,7 +46,7 @@ CREATE TABLE tbLeitura(
   fkSensor INT NOT NULL,
   PRIMARY KEY (idLeitura, fkSensor),
   CONSTRAINT fkSen FOREIGN KEY (fkSensor)
-  REFERENCES tbsensor(idSensor));
+  REFERENCES tbSensor(idSensor));
 
 CREATE TABLE tbAlerta(
   idAlerta INT NOT NULL AUTO_INCREMENT,
@@ -56,7 +55,7 @@ CREATE TABLE tbAlerta(
   fkLeitura INT NOT NULL,
   PRIMARY KEY (idAlerta, fkLeitura),
   CONSTRAINT fkLei FOREIGN KEY (fkLeitura)
-  REFERENCES tbleitura (idLeitura));
+  REFERENCES tbLeitura (idLeitura));
 
 CREATE TABLE tbUsuario(
   idUsuario INT NOT NULL AUTO_INCREMENT,
@@ -68,7 +67,31 @@ CREATE TABLE tbUsuario(
   fkEmpresa INT NOT NULL,
   PRIMARY KEY (idUsuario, fkEmpresa),
   CONSTRAINT fkEmp2 FOREIGN KEY (fkEmpresa)
-  REFERENCES tbempresa (idEmpresa));
+  REFERENCES tbEmpresa (idEmpresa));
+
+INSERT INTO tbEndereco (idEndereco, cep, logradouro, bairro, cidade, uf, numero, complemento)
+VALUES (1, '15000000', 'Rodovia Lurelin', 'Zona Rural', 'Itapecerica da Serra', 'SP', 0, 'Entrada pela porteira de madeira'),
+(2, '78192976', 'Estrada Amarela', 'Zona Rural', 'Ibaté', 'SP', 10, 'Ao lado do Trilho');
+
+-- Empresa com nome de fazenda/produtora
+INSERT INTO tbEmpresa (razaoSocial, nomeFantasia, cnpj, cdgAtivacao, fkEndereco)
+VALUES ('Rancho Lon Lon LTDA', 'Lon Lon', '98765432000100', 'Epona', 1), 
+('Fazenda do Jorge LTDA', 'Fazenda do Jorge', '73645179859019', 'C0br4', 2);
+
+INSERT INTO tbUsuario (nome, datanasc, cpf, senha, email, fkEmpresa)
+VALUES ('Talon', '1970-05-20', '12345678901', 'Malon1234', 'talon@lonlon.com', 1),
+('Malon', '1998-12-03', '92282791889', 'Epona12345', 'malon@lonlon.com', 1),
+('Jorge', '1980-09-17', '87862401801', 'Alonso01', 'jorge@jorge.com', 2);
+
+INSERT INTO tbApiario (identificacaoApiario, idEmpresa)
+VALUES ('Apiario no Setor Sul', 1),
+('Apiario no Setor Oeste', 1),
+('Apiario no Setor Norte', 2);
+
+INSERT INTO tbSensor (idApiario)
+VALUES (1),
+(2),
+(3);
 
 
 -- Lista todos os usuários (antigos apicultores), mostrando apenas nome e e-mail
@@ -106,13 +129,13 @@ FROM tbApiario c
 JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
 -- Listar os tipos de sensores instalados, em qual colmeia estão e a empresa dona
-SELECT s.tipoSensor, c.identificacaoApiario, emp.nomeFantasia
+SELECT s.idSensor, c.identificacaoApiario, emp.nomeFantasia
 FROM tbSensor s
 JOIN tbApiario c ON s.idApiario = c.idApiario
 JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
 
 -- Histórico de Alertas: Descrição, data, tipo de sensor e identificação da colmeia
-SELECT al.descricaoAlerta, al.dataHora, s.tipoSensor, c.identificacaoApiario
+SELECT al.descricaoAlerta, al.dataHora, s.idSensor, c.identificacaoApiario
 FROM tbAlerta al
 JOIN tbLeitura l ON al.fkLeitura = l.idLeitura
 JOIN tbSensor s ON l.fkSensor = s.idSensor
