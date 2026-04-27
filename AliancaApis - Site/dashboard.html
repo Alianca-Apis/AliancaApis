@@ -1,16 +1,15 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styleDashboard.css">
-   <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header class="navbar">
         <div class="logo">
@@ -18,145 +17,149 @@
         </div>
     </header>
 
-<!-- FIM HEADER-->
+    <!-- FIM HEADER-->
 
-<section class="main">
-    <div class="sidebar">
-        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
-        <a class="sidebar-active" href="#"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
-        <a href="#"><i class="fa-solid fa-calculator"></i>Calculadora</a>
-        <a href="#"><i class="fa-solid fa-user"></i>Perfil</a>
-        <a href="#"><i class="fa-solid"></i>Sair</a>
-        <br>
-        <hr>
-        <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
-        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
-
-    </div><!-- sidebar-->
-    <div class="content">
-        <div class="titulo-sessão">
-            <h2>Dashboard</h2>
+    <section class="main">
+        <div class="sidebar">
+            <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+            <a class="sidebar-active" href="#"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
+            <a href="#"><i class="fa-solid fa-calculator"></i>Calculadora</a>
+            <a href="#"><i class="fa-solid fa-user"></i>Perfil</a>
+            <a href="#"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
-            <br>
-            <p><i class="fa-solid fa-house"></i>/Dashboard Apiários</p>
-        </div>
-        
-        <div class="box-info">
-            <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;" class="box-info-single">
-                <div class="info-text">
-                    <h3>Apiário (7) </h3>
-                    <p>Temperatura atual: 28°C</p>
-                </div>
-                <i class="fa-solid fa-dollar-sign"></i>
-            </div>
-        
-            <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow; color: #5A4A00" class="box-info-single">
-                <div class="info-text">
-                    <h3>Há uma falha na homeostase</h3>
-                    <p>Média 24°C</p>
-                </div>
-                <i class="fa-solid fa-dollar-sign"></i>
-            </div>
-       
-          
-            <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;" class="box-info-single">
-                <div class="info-text">
-                    <h3> </h3>
-                    <p></p>
-                </div>
-                <i class="fa-solid fa-dollar-sign"></i>
-            </div>
-        </div>
-        
-     
+            <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
+        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
 
-        <!--graficos-->
-        <div class="graficos">
-            <div class="caixa">
-                <center>
-                <h1>Temperatura<br>
-                Apiário</h1>
-                <h1 id="ipt_h1"></h1>
-                </center>
-                <canvas id="meugrafico"></canvas>
+        </div><!-- sidebar-->
+        <div class="content">
+            <div class="titulo-sessão">
+                <h2>Dashboard</h2>
+                <br>
+                <hr>
+                <br>
+                <p><i class="fa-solid fa-house"></i>/Dashboard Apiários</p>
             </div>
-            <div class="caixaa">
-                <center>
-                <h2> Apiários <br>
-                 Desta hora!</h2>
-                </center>
-                <canvas id="meugraficobarras"></canvas>
-            </div>
-        </div>
-        
-        <p>Selecione um Apiário</p>
-        <input type="text" id="ipt_texto">
-        <button onclick="mostrar()">Selecionar</button>
-        
 
-    </div><!--content -->
-</section> <!--main-->
+            <div class="box-info">
+                <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
+                    class="box-info-single">
+                    <div class="info-text">
+                        <h3>Apiário (7) </h3>
+                        <p>Temperatura atual: 28°C</p>
+                    </div>
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+
+                <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow; color: #5A4A00"
+                    class="box-info-single">
+                    <div class="info-text">
+                        <h3>Há uma falha na homeostase</h3>
+                        <p>Média 24°C</p>
+                    </div>
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+
+
+                <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
+                    class="box-info-single">
+                    <div class="info-text">
+                        <h3> </h3>
+                        <p></p>
+                    </div>
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+            </div>
+
+
+
+            <!--graficos-->
+            <div class="graficos">
+                <div class="caixa">
+                    <center>
+                        <h1>Temperatura<br>
+                            Apiário</h1>
+                        <h1 id="ipt_h1"></h1>
+                    </center>
+                    <canvas id="meugrafico"></canvas>
+                </div>
+                <div class="caixaa">
+                    <center>
+                        <h2>Média dos apiários <br>
+                            por semana</h2>
+                    </center>
+                    <canvas id="meugraficobarras"></canvas>
+                </div>
+            </div>
+
+            <p>Selecione um Apiário</p>
+            <input type="text" id="ipt_texto">
+            <button onclick="mostrar()">Selecionar</button>
+
+
+        </div><!--content -->
+    </section> <!--main-->
 
 </body>
+
 </html>
 <script>
 
-function mostrar() {
+    function mostrar() {
         let texto = ipt_texto.value;
 
         ipt_h1.innerHTML = `${texto}`
-}
+    }
 
     let tudo = document.getElementById("meugrafico");
     let barra = document.getElementById("meugraficobarras");
-    
-   new Chart()
 
-     new Chart(tudo, {
-    type: 'line',
-    data: {
-      labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00','07:00','08:00','09:00','10:00','11:00','12:00'],
-      datasets: [{
-        backgroundColor: '#865D1D',
-        label: '# of Votes',
-        data: ['34', '36', '33','28 ','23 ','17 ','15 ','10 ', '12','16','20','22','18'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-    color: 'black',
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  }
- );
+    new Chart()
 
-   new Chart(barra, {
-    type: 'bar',
-    data: {
-      labels: ['Api1', 'Api2', 'Api3', 'Api4','Api5', 'Api6', 'Api7', 'Api8', 'Api9', 'Api10', 'Api11' , 'Api12'],
-      datasets: [{
-        backgroundColor: '#865D1D',
-        label: '# of Votes',
-        data: [23,26,22,24,30,27,34,22,20,25,30,35,28],
-        borderWidth: 1
-      }]
-    },
-    options: {
-    color: 'black',
-      scales: {
+    new Chart(tudo, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00'],
+            datasets: [{
+                backgroundColor: '#865D1D',
+                label: '# of Votes',
+                data: ['34', '36', '33', '28 ', '23 ', '17 ', '15 ', '10 ', '12', '16', '20', '22', '18'],
+                borderWidth: 1
+            }]
+        },
+        options: {
             color: 'black',
-
-        y: {
-          beginAtZero: true
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
     }
-  });
-   
+    );
+
+    new Chart(barra, {
+        type: 'bar',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                backgroundColor: '#865D1D',
+                label: 'Média semanal',
+                data: [24, 26, 23, 28, 30, 27, 25],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            color: 'black',
+            scales: {
+                color: 'black',
+
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 
 </script>
