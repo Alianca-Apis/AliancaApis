@@ -11,27 +11,33 @@ function entrar() {
 
 function cadastrar() {
     let nome = ipt_nome.value;
+    let dataNasc = ipt_dataNasc.value;
     let cpf = ipt_cpf.value;
     let email = ipt_email.value;
     let senha = ipt_senha.value;
     let confirmacaoSenha = ipt_confirmacaoSenha.value;
+    let confirmacaoCode = ipt_confirmacaoCodigo.value;
 
     let condicoesErro = [
         nome == "" || cpf == "" || email == "" || senha == "" || confirmacaoSenha == "",
-        nome == "" || nome.length <= 1,
+        nome == "" || nome.length <= 3,
+        dataNasc == "",
         cpf.length != 11,
         !email.includes("@"),
         senha.length < 6,
         confirmacaoSenha != senha,
+        confirmacaoCode == "" || confirmacaoCode.length < 5
     ];
 
     let mensagensErro = [
         "Todos campos são obrigatórios",
         "Nome inválido",
+        "Preencha a data de nascimento",
         "CPF deve ter 11 dígitos",
         "E-mail deve conter @",
         "Senha muito curta (mínimo 6)",
-        "Senhas não coincidem"
+        "Senhas não coincidem",
+        "Insira o Código de ativação válido"
     ];
 
     for (let i = 0; i < condicoesErro.length; i++) {
