@@ -67,8 +67,8 @@
                 <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
                     class="box-info-single">
                     <div class="info-text">
-                        <h3> </h3>
-                        <p></p>
+                        <h3> Faixa de temperatura Ideal</h3>
+                        <p>Temperatura atual: 35°C</p>
                     </div>
                     <i class="fa-solid fa-dollar-sign"></i>
                 </div>
@@ -82,7 +82,7 @@
                     <center>
                         <h1>Temperatura<br>
                             Apiário</h1>
-                        <h1 id="ipt_h1"></h1>
+                        <h1 id="ipt_filtro1"></h1>
                     </center>
                     <canvas id="meugrafico"></canvas>
                 </div>
@@ -90,6 +90,7 @@
                     <center>
                         <h2>Média dos apiários <br>
                             por semana</h2>
+                        <h1 id="ipt_filtro2"></h1>
                     </center>
                     <canvas id="meugraficobarras"></canvas>
                 </div>
@@ -111,7 +112,8 @@
     function mostrar() {
         let texto = ipt_texto.value;
 
-        ipt_h1.innerHTML = `${texto}`
+        ipt_filtro1.innerHTML = `${texto}`
+        ipt_filtro2.innerHTML = `${texto}`
     }
 
     let tudo = document.getElementById("meugrafico");
@@ -148,7 +150,7 @@
     new Chart(barra, {
         type: 'bar',
         data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            labels: ['01/01', '08/01', '15/01', '22/01', '29/01', '06/02', '13/02'],
             datasets: [{
                 backgroundColor: '#865D1D',
                 label: 'Média semanal',
