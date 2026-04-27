@@ -2,3 +2,4 @@ A AliançaApis é uma plataforma de monitoramento de temperatura inteligente vol
 
 
 
+<img width="275" height="183" alt="image" src="https://github.com/user-attachments/assets/3a44bd4a-04c1-4196-b59e-1676e3934854" />
