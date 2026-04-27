@@ -3,6 +3,7 @@
     src: url('./assets/fonts/Manrope/Manrope-VariableFont.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -10,15 +11,23 @@
     src: url('./assets/fonts/Noto_Serif/NotoSerif-VariableFont.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
+    font-display: swap;
 }
 
 body {
-      background-color: #f9f6ed;
+    background-color: #f9f6ed;
     color: #2d0a31;
     font-family: 'Manrope', sans-serif;
     line-height: 1.6;
     margin: 0;
+    margin-top: 70px;
     font-weight: 400;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'NotoSerif', serif;
 }
 
 * {
@@ -32,26 +41,26 @@ body {
     justify-content: center;
     align-items: center;
     padding-bottom: 13px;
-    
-    position: fixed;    
-    top: 0;
-    height: 70px;        
-    left: 0;            
-    width: 100%;      
-    z-index: 1000;      
 
-    background-color: #f9f6edc5; 
+    position: fixed;
+    top: 0;
+    height: 70px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    background-color: #f9f6edc5;
     background-image: url(./assets/imgs/colmeia.png);
     background-size: contain;
-    
-    backdrop-filter: blur(10px); 
+
+    backdrop-filter: blur(10px);
 
     border-bottom: 1px solid #2d0a310e;
     box-sizing: border-box;
-    
+
 }
 
-a{
+a {
     text-decoration: none;
     color: #2D0A31;
 }
@@ -59,9 +68,9 @@ a{
 /*icons-header*/
 .logo {
     height: 50px;
-    display: flex;          
-    justify-content: center; 
-    align-items: center;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo img {
@@ -73,49 +82,53 @@ a{
 /*main*/
 .main {
     display: flex;
-    flex-wrap: wrap;
-    height: 100vh;
+    flex-wrap: nowrap;
+    min-height: calc(100vh - 70px);
+    align-items: flex-start;
 }
-
-
-
-
 
 /*todos os sidebar*/
 .sidebar {
     width: 20%;
-    height: 100%;
+    min-width: 220px;
+    min-height: calc(100vh - 70px);
     background-color: rgb(235, 229, 229);
 }
-.sidebar h3{
+
+.sidebar h3 {
     color: rgb(100, 4, 124);
     font-size: 20px;
     margin: 10px;
 }
-.sidebar a{
+
+.sidebar a {
     display: block;
     text-decoration: none;
-    padding:10px 15px;
+    padding: 10px 15px;
     color: rgb(57, 0, 83);
 }
-.sidebar a > svg {
+
+.sidebar a>svg {
     color: rgb(57, 0, 83);
 }
+
 .sidebar a.sidebar-active {
     border-left: 5px solid #9a6e2a;
-    background-color:#555;
+    background-color: #555;
     color: #9a6e2a;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .sidebar a.sidebar-active svg {
     color: rgb(57, 0, 83);
-  
+
 }
-.sidebar a:hover{
+
+.sidebar a:hover {
     border-left: 5px solid #9a6e2a;
-    background-color:rgb(197, 180, 202);
+    background-color: rgb(197, 180, 202);
     color: #9a6e2a;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 /*.sidebar a:hover .sidebar a > svg {
@@ -128,7 +141,8 @@ a{
 
 
 .content {
-    width: 80%;
+    flex: 1;
+    width: auto;
     background-color: #d6d5d2;
     padding: 20px;
 }
@@ -142,31 +156,33 @@ a{
 .logo {
     margin-top: 15px;
 }
+
 .logo h3 {
     cursor: pointer;
 }
+
 .logo h3:hover {
-    opacity:0.7;
+    opacity: 0.7;
 }
 
 
 
-.titulo-sessão{
+.titulo-sessão {
     background-color: white;
     padding: 10px;
-    border-radius: 10px ;
+    border-radius: 10px;
 }
 
-.titulo-sessão h2{
-    font-size: 19px;
+.titulo-sessão h2 {
+    font-size: 40px;
 }
 
-.titulo-sessão p{
+.titulo-sessão p {
     font-size: 14px;
 }
 
-.titulo-sessão i{
-    color:#9a6e2a;
+.titulo-sessão i {
+    color: #9a6e2a;
 }
 
 /* se eu não gostar do meu hr e quise mudar no index , vou substiruir o hr por div class= "separador" div.
@@ -176,25 +192,28 @@ width:100%;
 height: 1px;
 background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa quase invisivel}*/
 
-.box-info{
+.box-info {
     width: 100%;
-    margin: 20px;
+    margin: 20px 0;
     display: flex;
     justify-content: space-between;
-    
+    gap: 10px;
+
 }
 
-.box-info-single{
+.box-info-single {
     display: flex;
     justify-content: space-between;
-    border-radius:10px;
+    border-radius: 10px;
     color: white;
     padding: 30px;
-    width: 80%;
-    margin:0 10px;
+    width: calc(33.333% - 7px);
+    margin: 0;
     align-items: center;
+    border: 2px solid;
 }
-.box-info-single svg{
+
+.box-info-single svg {
     font-size: 28px;
     display: flex;
 
@@ -202,8 +221,8 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 
 .feed {
-    margin: 10px;
-    width: 98%;
+    margin: 10px 0;
+    width: 100%;
     padding: 50px;
     background-color: white;
     border-radius: 10px;
@@ -213,9 +232,11 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     display: flex;
     justify-content: space-between;
 }
+
 .feed-text span {
     color: black;
 }
+
 /* se que quiser mudar meu icone de cor
     width: 40px;
     height: 40px;
@@ -231,14 +252,16 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     left: 50%;
 
 }
+
 .feed-text .circle-icon {
     width: 30px;
     height: 30px;
     border-radius: 15px;
-    background-color: cyan ;
+    background-color: cyan;
     position: relative;
 
 }
+
 .feed-number {
     color: #444;
 
@@ -251,34 +274,47 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 .graficos {
     display: flex;
-    gap: 5vw;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 
 .caixa {
 
-    width: 600px;
-    height: 400px;
-    margin:20px auto;
+    flex: 1 1 320px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
     padding: 20px;
-    background-color: #e5c27f;
+    background-color: #E5E3D6;
     border-radius: 20px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Manrope', sans-serif;
     color: black;
-    
+
 }
+
 .caixaa {
-    width: 600px;
-    height: 400px;
-    margin:20px auto;
+    flex: 1 1 320px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
     padding: 20px;
-    background-color: #e5c27f;
+    background-color: #E5E3D6;
     border-radius: 20px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Manrope', sans-serif;
     color: black;
     font-size: 20px;
 }
 
-#meugrafico{
+.caixa canvas,
+.caixaa canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#meugrafico {
     color: black;
 }

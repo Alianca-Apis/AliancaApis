@@ -22,11 +22,11 @@
 
 <section class="main">
     <div class="sidebar">
-        <h3>Home</h3>
-        <a class="sidebar-active" href="#"><i class="fa-solid fa-house"></i>Relatórios</a>
-        <a href="#"><i class="fa-solid fa-house"></i>Calculadora</a>
-        <a href="#"><i class="fa-solid fa-house"></i>Perfil</a>
-        <a href="#"><i class="fa-solid fa-house"></i>Mel</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+        <a class="sidebar-active" href="#"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
+        <a href="#"><i class="fa-solid fa-calculator"></i>Calculadora</a>
+        <a href="#"><i class="fa-solid fa-user"></i>Perfil</a>
+        <a href="#"><i class="fa-solid"></i>Sair</a>
         <br>
         <hr>
         <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
@@ -43,7 +43,7 @@
         </div>
         
         <div class="box-info">
-            <div style="background-color: rgba(216, 13, 13, 0.801);" class="box-info-single">
+            <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red;" class="box-info-single">
                 <div class="info-text">
                     <h3>Apiário (7) </h3>
                     <p>Temperatura atual: 28°C</p>
@@ -51,7 +51,7 @@
                 <i class="fa-solid fa-dollar-sign"></i>
             </div>
         
-            <div style="background-color: rgba(255, 238, 0, 0.836);" class="box-info-single">
+            <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow;" class="box-info-single">
                 <div class="info-text">
                     <h3>Há uma falha na homeostase</h3>
                     <p>Média 24°C</p>
@@ -60,7 +60,7 @@
             </div>
        
           
-            <div style="background-color: rgba(20, 252, 32, 0.733);" class="box-info-single">
+            <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green;;" class="box-info-single">
                 <div class="info-text">
                     <h3> </h3>
                     <p></p>
@@ -69,20 +69,7 @@
             </div>
         </div>
         
-        
-        <div class="feed">
-           <div class="feed-single">
-                <div class="feed-text">
-                   <div class="circle-icons"><i class="fa-regular fa-bell"></i>
-                        <span>Migratória</span> 
-                    </div>
-                </div> 
-                <div class="feed-number">
-                     <h3>30 espécies</h3>
-                </div>
-           </div>
-
-        </div>
+     
 
         <!--graficos-->
         <div class="graficos">
@@ -131,7 +118,7 @@ function mostrar() {
     data: {
       labels: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00','07:00','08:00','09:00','10:00','11:00','12:00'],
       datasets: [{
-        backgroundColor: '#2D0A31',
+        backgroundColor: '#865D1D',
         label: '# of Votes',
         data: ['34', '36', '33','28 ','23 ','17 ','15 ','10 ', '12','16','20','22','18'],
         borderWidth: 1
@@ -153,7 +140,7 @@ function mostrar() {
     data: {
       labels: ['Api1', 'Api2', 'Api3', 'Api4','Api5', 'Api6', 'Api7', 'Api8', 'Api9', 'Api10', 'Api11' , 'Api12'],
       datasets: [{
-        backgroundColor: '#2D0A31',
+        backgroundColor: '#865D1D',
         label: '# of Votes',
         data: [23,26,22,24,30,27,34,22,20,25,30,35,28],
         borderWidth: 1
