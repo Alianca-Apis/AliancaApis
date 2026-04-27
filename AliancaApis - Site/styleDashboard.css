@@ -15,7 +15,7 @@
 }
 
 body {
-    background-color: #f9f6ed;
+    background-color: #EBE5E5;
     color: #2d0a31;
     font-family: 'Manrope', sans-serif;
     line-height: 1.6;
@@ -168,7 +168,7 @@ a {
 
 
 .titulo-sessão {
-    background-color: white;
+    background-color: #f5f3e7;
     padding: 10px;
     border-radius: 10px;
 }
