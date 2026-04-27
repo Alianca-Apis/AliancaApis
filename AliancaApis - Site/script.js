@@ -45,45 +45,74 @@ function cadastrar() {
     alert('INDISPONÍVEL NO MOMENTO, TENTE NOVAMENTE MAIS TARDE')
 }
 
-// CALCULADORA / SIMULADOR FINANCEIRO
-    let enxamePreco = 450;
-    let custoSensor = 75;
-    let custoCaixas = 200;
+let enxamePreco = 450;
+let custoSensor = 75;
+let custoCaixas = 200;
 
-    function calculo(){
-        let preco = Number(ipt_preco.value);
-        let kilos = Number(ipt_kg.value);
-        let qtdColmeia = Number(ipt_quantidade.value);
-        let valorMan = Number(ipt_manutencao.value)
-        let venda = preco * kilos * qtdColmeia;
-        let custoManutencao = valorMan * qtdColmeia;
-        let lucro = (venda * 0.30) - custoManutencao;
-        let reposicao = ((qtdColmeia * 0.30) * custoCaixas) + ((qtdColmeia * 0.30) * enxamePreco);
-        let custoTotal = custoSensor * qtdColmeia;
-        let roi = ((lucro - custoTotal) / custoTotal) * 100
-        let contrato = contrata.value
+function calculo(){
 
-        divMsg.innerHTML = " ";
+    let preco = Number(ipt_preco.value);
+    let kilos = Number(ipt_kg.value);
+    let qtdColmeia = Number(ipt_quantidade.value);
+    let valorMan = Number(ipt_manutencao.value);
+    let contrato = contrata.value;
 
-        if(contrato == 's'){
+    divMsg.innerHTML = "";
+    if (
+        preco <= 0 ||
+        kilos <= 0 ||
+        qtdColmeia <= 0 ||
+        valorMan < 0 ||
+        isNaN(preco) ||
+        isNaN(kilos) ||
+        isNaN(qtdColmeia) ||
+        isNaN(valorMan)
+    ) {
+        divMsg.innerHTML = `<span style="color:red">Preencha todos os campos corretamente!</span>`;
+        return;
+    }
+    let venda = preco * kilos * qtdColmeia;
+    let custoManutencao = valorMan * qtdColmeia;
+    let lucro = venda  - custoManutencao;
 
-        divMsg.innerHTML += `Obrigado por confiar em nós da Aliança Apis<br>`
+    let reposicao =
+        (qtdColmeia * 0.30 * custoCaixas) +
+        (qtdColmeia * 0.30 * enxamePreco);
 
-        divMsg.innerHTML += `Com o nosso serviço contratado você está evitando uma perda de até R$${(lucro + reposicao).toFixed(2)}.<br>Contando com a receita da produção de mel em 100% e com reposição de colmeias<br>`
+    let custoTotal = custoSensor * qtdColmeia;
 
-        divMsg.innerHTML += `Assim obtendo um ROI de ${roi.toFixed(0)}%`
+    let roi = 0;
+    if (custoTotal > 0) {
+        roi = ((lucro * 0.3) - custoTotal) / custoTotal * 100;
+    }
 
-    } else {
+    if (contrato == 's') {
 
-        if(kilos < 45){
-            divMsg.innerHTML += `<span style="color: red">Suas abelhas produzem abaixo do nível esperado pode haver algo de errado!!</span><br>`
+        divMsg.innerHTML += `Obrigado por confiar na Aliança Apis!<br><br>`;
+
+        divMsg.innerHTML += `Você está evitando uma perda de até <b>R$ ${((lucro * 0.3) + reposicao).toFixed(2)}</b>.<br>`;
+
+        divMsg.innerHTML += `Mantendo 100% da produção + reposição de colmeias.<br><br>`;
+
+        divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%</b><br>`;
+
+    } 
+    else {
+
+        if (kilos < 45) {
+            divMsg.innerHTML += `<span style="color:red">Produção abaixo do esperado! Pode haver problemas na colmeia.</span><br><br>`;
         }
 
-        divMsg.innerHTML += `Caso você não adquira nosso serviço você pode deixar de ter um faturamento de R$${lucro.toFixed(2)}, considerando que 36% da população geral de abelhas é afetada pelo DCC!<br>`
+        if (lucro < 0) {
+            divMsg.innerHTML += `<span style="color:red">Você está tendo prejuízo na produção!</span><br><br>`;
+        }
 
-        divMsg.innerHTML += `Além do faturamento perdido você terá um prejuizo de R$${reposicao.toFixed(2)} de reposição.<br> Com os gastos de novos enxames e aquisição de novas caixas colmeia.<br>`
+        divMsg.innerHTML += `Sem o serviço, você pode deixar de ganhar <b>R$ ${(lucro * 0.3).toFixed(2)}</b>.<br>`;
 
-        divMsg.innerHTML += `Caso adquira o nosso serviço que custaria R$${custoTotal.toFixed(2)} você terá um ROI estimado de ${roi.toFixed(0)}%`
+        divMsg.innerHTML += `Além disso, terá um custo de reposição de <b>R$ ${reposicao.toFixed(2)}</b>.<br><br>`;
+
+        divMsg.innerHTML += `Nosso serviço custaria <b>R$ ${custoTotal.toFixed(2)}</b>.<br>`;
+
+        divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%</b>`;
     }
-    
 }
