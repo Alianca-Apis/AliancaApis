@@ -39,7 +39,9 @@
                 <br>
                 <p><i class="fa-solid fa-house"></i>/Dashboard Apiários</p>
             </div>
+                    <!-- Sinalizadores de Temperatura -->
 
+                <!-- Alerta Critico -->
             <div class="box-info">
                 <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
                     class="box-info-single">
@@ -50,6 +52,7 @@
                     <i class="fa-solid fa-dollar-sign"></i>
                 </div>
 
+                <!-- Alerta fora da normalidade -->
                 <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow; color: #5A4A00"
                     class="box-info-single">
                     <div class="info-text">
@@ -59,6 +62,7 @@
                     <i class="fa-solid fa-dollar-sign"></i>
                 </div>
 
+                    <!-- Temperatura normal -->
 
                 <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
                     class="box-info-single">
@@ -115,6 +119,8 @@
 
     new Chart()
 
+    // grafico de linha que mostra a temperatura do apiario em tempo real 5 em 5 minutos 
+
     new Chart(tudo, {
         type: 'line',
         data: {
@@ -136,6 +142,8 @@
         }
     }
     );
+
+    // Grafico que mostra a media de temperatura dos aparios na semana 
 
     new Chart(barra, {
         type: 'bar',
