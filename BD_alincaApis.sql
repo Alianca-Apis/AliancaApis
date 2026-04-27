@@ -229,9 +229,15 @@ FROM tbApiario
 WHERE idEmpresa = 1;
 
 -- Mostrar todas as leituras de sensores com valor maior que o permitido para colmeias
-SELECT idLeitura, valorLeitura, dataHora 
-FROM tbLeitura 
-WHERE valorLeitura > 36.0;
+SELECT
+    valorLeitura, 
+    dataHora,
+    CASE 
+        WHEN valorLeitura < 34.50 THEN 'Baixo'
+        WHEN valorLeitura BETWEEN 34.50 AND 36 THEN 'Normal'
+        ELSE 'Alto'
+    END AS statusLeitura
+FROM tbLeitura;
 
 -- Contar quantos alertas foram registrados no total
 SELECT COUNT(*) AS total_alertas 
