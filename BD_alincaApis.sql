@@ -159,7 +159,7 @@ INSERT INTO tbApiario (identificacaoApiario, idEmpresa)
 VALUES ('Apiario no Setor Sul', 1),
 ('Apiario no Setor Oeste', 1),
 ('Apiario no Setor Norte', 2),
-('Apiario Vale de Hyrule', 3),
+('Apiario no Alley', 3),
 ('Apiario Rota Pokémon', 4),
 ('Apiario Torre Stark', 5),
 ('Apiario Caverna do Batman', 6),
