@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS aliancaapis;
 USE aliancaapis;
 
-CREATE TABLE tbEndereco(
+CREATE TABLE endereco(
   idEndereco INT NOT NULL,
   cep CHAR(8) NOT NULL,
   logradouro VARCHAR(255) NOT NULL,
@@ -13,33 +13,36 @@ CREATE TABLE tbEndereco(
   PRIMARY KEY (idEndereco));
   
 
-CREATE TABLE tbEmpresa(
+CREATE TABLE empresa(
   idEmpresa INT NOT NULL AUTO_INCREMENT,
   razaoSocial VARCHAR(255) NOT NULL,
   nomeFantasia VARCHAR(255) NOT NULL,
   cnpj CHAR(14) NOT NULL,
   cdgAtivacao CHAR(5) NOT NULL,
   fkEndereco INT NOT NULL,
+  fkMatriz INT,
   PRIMARY KEY (idEmpresa),
   CONSTRAINT fkEnd FOREIGN KEY (fkEndereco)
-  REFERENCES tbEndereco (idEndereco));
+  REFERENCES tbEndereco (idEndereco),
+  CONSTRAINT fkMat FOREIGN KEY (fkMatriz)
+  REFERENCES tbEmpresa (idEmpresa));
 
-CREATE TABLE tbApiario(
+CREATE TABLE apiario(
   idApiario INT NOT NULL AUTO_INCREMENT,
   identificacaoApiario VARCHAR(40),
-  idEmpresa INT,
+  fkEmpresa INT,
   PRIMARY KEY (idApiario),
   CONSTRAINT fkEmp FOREIGN KEY (idEmpresa)
-    REFERENCES tbEmpresa(idEmpresa));
+  REFERENCES tbEmpresa(idEmpresa));
 
-CREATE TABLE tbSensor(
+CREATE TABLE sensor(
   idSensor INT NOT NULL AUTO_INCREMENT,
-  idApiario INT,
+  fkApiario INT,
   PRIMARY KEY (idSensor),
   CONSTRAINT fkCol FOREIGN KEY (idApiario)
   REFERENCES tbApiario (idApiario));
 
-CREATE TABLE tbLeitura(
+CREATE TABLE leitura(
   idLeitura INT NOT NULL AUTO_INCREMENT,
   valorLeitura FLOAT,
   dataHora DATETIME,
@@ -48,7 +51,7 @@ CREATE TABLE tbLeitura(
   CONSTRAINT fkSen FOREIGN KEY (fkSensor)
   REFERENCES tbSensor(idSensor));
 
-CREATE TABLE tbAlerta(
+CREATE TABLE alerta(
   idAlerta INT NOT NULL AUTO_INCREMENT,
   descricaoAlerta VARCHAR(100),
   dataHora DATETIME,
@@ -57,7 +60,7 @@ CREATE TABLE tbAlerta(
   CONSTRAINT fkLei FOREIGN KEY (fkLeitura)
   REFERENCES tbLeitura (idLeitura));
 
-CREATE TABLE tbUsuario(
+CREATE TABLE usuario(
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50),
   datanasc DATE,
