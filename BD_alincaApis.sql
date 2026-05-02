@@ -11,7 +11,6 @@ CREATE TABLE endereco(
   numero INT NOT NULL,
   complemento VARCHAR(255) NULL,
   PRIMARY KEY (idEndereco));
-  
 
 CREATE TABLE empresa(
   idEmpresa INT NOT NULL AUTO_INCREMENT,
