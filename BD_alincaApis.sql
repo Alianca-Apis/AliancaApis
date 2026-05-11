@@ -42,7 +42,7 @@ CREATE TABLE sensor(
 
 CREATE TABLE leitura(
   idLeitura INT NOT NULL AUTO_INCREMENT,
-  valorLeitura FLOAT,
+  temperatura FLOAT,
   dataHora DATETIME DEFAULT NOW(),
   fkSensor INT NOT NULL,
   PRIMARY KEY (idLeitura, fkSensor),
@@ -194,7 +194,7 @@ create view vw_login as
 select idUsuario, nome, email, senha, classe, fkEmpresa from usuario;
 
 create or replace view vw_temperaturaIndividual as
-select l.valorLeitura as temperatura,
+select l.temperatura as temperatura,
 l.dataHora as horario,
 a.identificacaoApiario as nome_apiario,
 a.idApiario as id_apiario,
