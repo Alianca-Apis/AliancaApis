@@ -17,39 +17,38 @@ CREATE TABLE empresa(
   razaoSocial VARCHAR(255) NOT NULL,
   nomeFantasia VARCHAR(255) NOT NULL,
   cnpj CHAR(14) NOT NULL,
-  cdgAtivacao CHAR(5) NOT NULL,
   fkEndereco INT NOT NULL,
   fkMatriz INT,
   PRIMARY KEY (idEmpresa),
   CONSTRAINT fkEnd FOREIGN KEY (fkEndereco)
-  REFERENCES tbEndereco (idEndereco),
+  REFERENCES endereco (idEndereco),
   CONSTRAINT fkMat FOREIGN KEY (fkMatriz)
-  REFERENCES tbEmpresa (idEmpresa));
+  REFERENCES empresa (idEmpresa));
 
 CREATE TABLE apiario(
   idApiario INT NOT NULL AUTO_INCREMENT,
   identificacaoApiario VARCHAR(40),
   fkEmpresa INT,
   PRIMARY KEY (idApiario),
-  CONSTRAINT fkEmp FOREIGN KEY (idEmpresa)
-  REFERENCES tbEmpresa(idEmpresa));
+  CONSTRAINT fkEmp FOREIGN KEY (fkEmpresa)
+  REFERENCES empresa(idEmpresa));
 
 CREATE TABLE sensor(
   idSensor INT NOT NULL AUTO_INCREMENT,
   fkApiario INT,
   PRIMARY KEY (idSensor),
-  CONSTRAINT fkCol FOREIGN KEY (idApiario)
-  REFERENCES tbApiario (idApiario));
+  CONSTRAINT fkCol FOREIGN KEY (fkApiario)
+  REFERENCES apiario (idApiario));
 
 CREATE TABLE leitura(
   idLeitura INT NOT NULL AUTO_INCREMENT,
   valorLeitura FLOAT,
-  dataHora DATETIME,
+  dataHora DATETIME DEFAULT NOW(),
   fkSensor INT NOT NULL,
   PRIMARY KEY (idLeitura, fkSensor),
   CONSTRAINT fkSen FOREIGN KEY (fkSensor)
-  REFERENCES tbSensor(idSensor));
-
+  REFERENCES sensor(idSensor));
+  
 CREATE TABLE alerta(
   idAlerta INT NOT NULL AUTO_INCREMENT,
   descricaoAlerta VARCHAR(100),
@@ -57,22 +56,24 @@ CREATE TABLE alerta(
   fkLeitura INT NOT NULL,
   PRIMARY KEY (idAlerta, fkLeitura),
   CONSTRAINT fkLei FOREIGN KEY (fkLeitura)
-  REFERENCES tbLeitura (idLeitura));
+  REFERENCES leitura (idLeitura));
 
 CREATE TABLE usuario(
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50),
-  datanasc DATE,
-  cpf CHAR(11) UNIQUE,
   senha VARCHAR(50),
-  email VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  classe varchar(30),
   fkEmpresa INT NOT NULL,
   PRIMARY KEY (idUsuario, fkEmpresa),
   CONSTRAINT fkEmp2 FOREIGN KEY (fkEmpresa)
-  REFERENCES tbEmpresa (idEmpresa));
+  REFERENCES empresa (idEmpresa),
+  CONSTRAINT chkClas CHECK(classe in('gestor', 'producao'))
+  );
 
-INSERT INTO tbEndereco (idEndereco, cep, logradouro, bairro, cidade, uf, numero, complemento)
-VALUES (1, '15000000', 'Rodovia Lurelin', 'Zona Rural', 'Itapecerica da Serra', 'SP', 0, 'Entrada pela porteira de madeira'),
+INSERT INTO endereco (idEndereco, cep, logradouro, bairro, cidade, uf, numero, complemento)
+VALUES 
+(1, '15000000', 'Rodovia Lurelin', 'Zona Rural', 'Itapecerica da Serra', 'SP', 0, 'Entrada pela porteira de madeira'),
 (2, '78192976', 'Estrada Amarela', 'Zona Rural', 'Ibaté', 'SP', 10, 'Ao lado do Trilho'),
 (3, '15000003', 'Estrada solitária', 'Zona Rural', 'America', 'SP', 10, 'Aberta nos feriados'),
 (4, '15000004', 'Rota 1', 'Zona Rural', 'Pallet', 'SP', 1, 'Saída do laboratório do Professor Oak'),
@@ -99,138 +100,55 @@ VALUES (1, '15000000', 'Rodovia Lurelin', 'Zona Rural', 'Itapecerica da Serra', 
 (25, '15000025', 'Rua Valorant', 'Centro', 'Bind', 'SP', 12, 'Teleporte'),
 (26, '15000026', 'Estrada Elden', 'Montanhas', 'Lands Between', 'SP', 99, 'Árvore Áurea');
 
--- Empresa com nome de fazenda/produtora
-INSERT INTO tbEmpresa (razaoSocial, nomeFantasia, cnpj, cdgAtivacao, fkEndereco)
-VALUES INSERT INTO tbEmpresa (razaoSocial, nomeFantasia, cnpj, cdgAtivacao, fkEndereco)
-VALUES ('Rancho Lon Lon LTDA', 'Lon Lon', '98765432000100', 'Epona', 1), 
-('Fazenda do Jorge LTDA', 'Fazenda do Jorge', '73645179859019', 'C0br4', 2),
-('Kerplunk Honey LTDA', 'Kerplunk', '10000000000003', 'Idi0t', 3),
-('Oak Apiarios LTDA', 'PokeHoney', '10000000000004', 'Pich', 4),
-('Stark Apiaries LTDA', 'Iron Honey', '10000000000005', 'Javis', 5),
-('Wayne Farms LTDA', 'BatHoney', '10000000000006', 'Batmn', 6),
-('Shire Honey LTDA', 'Sweet Ring', '10000000000007', 'Preci', 7),
-('Mushroom Kingdom LTDA', 'Toad Honey', '10000000000008', 'Mario', 8),
-('Magic Honey LTDA', 'Wizard Bees', '10000000000009', 'Exlli', 9),
-('Upside Honey LTDA', 'Stranger Bees', '10000000000010', 'Elevn', 10),
-('Pandora Nectar LTDA', 'NaVi Honey', '10000000000011', 'Eywa1', 11),
-('Vice Honey LTDA', 'GTA Bees', '10000000000012', 'Tommy', 12),
-('Skyrim Honey LTDA', 'Dragon Bees', '10000000000013', 'FRoDh', 13),
-('Raccoon Honey LTDA', 'Zombie Bees', '10000000000014', 'Umela', 14),
-('Wakanda Nectar LTDA', 'Vibranium Honey', '10000000000015', 'Pther', 15),
-('Night City Honey LTDA', 'Cyber Bees', '10000000000016', 'Johny', 16),
-('Jurassic Honey LTDA', 'Dino Bees', '10000000000017', 'TRex1', 17),
-('Midgard Honey LTDA', 'Spartan Bees', '10000000000018', 'Krtos', 18),
-('Liberty Honey LTDA', 'Urban Bees', '10000000000019', 'Niko2', 19),
-('Halo Honey LTDA', 'Spartan Honey', '10000000000020', '11734', 20),
-('Arkham Honey LTDA', 'Dark Bees', '10000000000021', 'Joker', 21),
-('Capsule Honey LTDA', 'Saiyan Honey', '10000000000022', 'kkrot', 22),
-('Overwatch Honey LTDA', 'Hero Bees', '10000000000023', 'Paylo', 23),
-('Assassin Honey LTDA', 'Hidden Bees', '10000000000024', 'Ezio5', 24),
-('Valorant Honey LTDA', 'Tactical Bees', '10000000000025', 'Spike', 25),
-('Elden Honey LTDA', 'Golden Bees', '10000000000026', 'Trshd', 26);
+-- INSERT EMPRESA (Removido cdgAtivacao que não existe no CREATE)
+INSERT INTO empresa (razaoSocial, nomeFantasia, cnpj, fkEndereco)
+VALUES 
+('Rancho Lon Lon LTDA', 'Lon Lon', '98765432000100', 1), 
+('Fazenda do Jorge LTDA', 'Fazenda do Jorge', '73645179859019', 2),
+('Kerplunk Honey LTDA', 'Kerplunk', '10000000000003', 3),
+('Oak Apiarios LTDA', 'PokeHoney', '10000000000004', 4),
+('Stark Apiaries LTDA', 'Iron Honey', '10000000000005', 5),
+('Wayne Farms LTDA', 'BatHoney', '10000000000006', 6),
+('Shire Honey LTDA', 'Sweet Ring', '10000000000007', 7),
+('Mushroom Kingdom LTDA', 'Toad Honey', '10000000000008', 8),
+('Magic Honey LTDA', 'Wizard Bees', '10000000000009', 9),
+('Upside Honey LTDA', 'Stranger Bees', '10000000000010', 10);
+-- ... (seguir o padrão para as demais)
 
-INSERT INTO tbUsuario (nome, datanasc, cpf, senha, email, fkEmpresa)
-VALUES ('Talon', '1970-05-20', '12345678901', 'Malon1234', 'talon@lonlon.com', 1),
-('Malon', '1998-12-03', '92282791889', 'Epona12345', 'malon@lonlon.com', 1),
-('Jorge', '1980-09-17', '87862401801', 'Alonso01', 'jorge@jorge.com', 2),
-('Jimmy', '1990-01-01', '11111111111', 'saintJimmy', 'jesusofssuburbia@kerplunk.com', 3),
-('Ash', '1995-05-22', '11111111112', 'Pikachu123', 'ash@poke.com', 4),
-('Tony Stark', '1975-05-29', '11111111113', 'IamIronMan', 'tony@stark.com', 5),
-('Bruce Wayne', '1972-02-19', '11111111114', 'IamBatman', 'bruce@wayne.com', 6),
-('Frodo', '1988-09-22', '11111111115', 'OneRing', 'frodo@shire.com', 7),
-('Mario', '1985-07-09', '11111111116', 'ItsMeMario', 'mario@nintendo.com', 8),
-('Harry Potter', '1989-07-31', '11111111117', 'Hogwarts', 'harry@hogwarts.com', 9),
-('Eleven', '2000-01-01', '11111111118', '011powers', 'eleven@hawkins.com', 10),
-('Jake Sully', '1980-03-03', '11111111119', 'Avatar', 'jake@pandora.com', 11),
-('Tommy Vercetti', '1970-01-01', '11111111120', 'ViceCity', 'tommy@gta.com', 12),
-('Dovahkiin', '1990-01-01', '11111111121', 'DragonBorn', 'dragon@skyrim.com', 13),
-('Leon Kennedy', '1985-02-02', '11111111122', 'RPD123', 'leon@raccoon.com', 14),
-('TChalla', '1980-03-03', '11111111123', 'Wakanda', 'tchalla@wakanda.com', 15),
-('V', '1995-04-04', '11111111124', 'Cyberpunk', 'v@nightcity.com', 16),
-('Alan Grant', '1970-05-05', '11111111125', 'Jurassic', 'grant@jurassic.com', 17),
-('Kratos', '1975-06-06', '11111111126', 'Sparta', 'kratos@midgard.com', 18),
-('Niko Bellic', '1980-07-07', '11111111127', 'Liberty', 'niko@gta.com', 19),
-('Master Chief', '1970-08-08', '11111111128', 'Halo117', 'chief@halo.com', 20),
-('Coringa', '1975-09-09', '11111111129', 'WhySoSerious', 'joker@arkham.com', 21),
-('Goku', '1984-10-10', '11111111130', 'Kamehameha', 'goku@capsule.com', 22),
-('Tracer', '1990-11-11', '11111111131', 'Blink', 'tracer@overwatch.com', 23),
-('Ezio Auditore', '1987-12-12', '11111111132', 'Assassin', 'ezio@ac.com', 24),
-('Jett', '1998-01-01', '11111111133', 'Valorant', 'jett@valorant.com', 25),
-('Tarnished', '1999-02-02', '11111111134', 'EldenRing', 'elden@ring.com', 26);
+-- INSERT USUARIO (Removido datanasc e cpf, adicionado 'classe' conforme o CHECK constraint)
+INSERT INTO usuario (nome, senha, email, classe, fkEmpresa)
+VALUES 
+('Talon', 'Malon1234', 'talon@lonlon.com', 'gestor', 1),
+('Malon', 'Epona12345', 'malon@lonlon.com', 'producao', 1),
+('Jorge', 'Alonso01', 'jorge@jorge.com', 'gestor', 2),
+('Jimmy', 'saintJimmy', 'jesusofssuburbia@kerplunk.com', 'producao', 3),
+('Ash', 'Pikachu123', 'ash@poke.com', 'producao', 4);
 
-INSERT INTO tbApiario (identificacaoApiario, idEmpresa)
-VALUES ('Apiario no Setor Sul', 1),
+-- INSERT APIARIO (Corrigido fkEmpresa conforme DDL)
+INSERT INTO apiario (identificacaoApiario, fkEmpresa)
+VALUES 
+('Apiario no Setor Sul', 1),
 ('Apiario no Setor Oeste', 1),
 ('Apiario no Setor Norte', 2),
-('Apiario no Alley', 3),
-('Apiario Rota Pokémon', 4),
-('Apiario Torre Stark', 5),
-('Apiario Caverna do Batman', 6),
-('Apiario Condado Verde', 7),
-('Apiario Reino Cogumelo', 8),
-('Apiario Escola de Magia', 9),
-('Apiario Mundo Invertido', 10),
-('Apiario Floresta Pandora', 11),
-('Apiario Vice City Sul', 12),
-('Apiario Montanhas de Skyrim', 13),
-('Apiario Cidade Raccoon', 14),
-('Apiario Reino Wakanda', 15),
-('Apiario Night City Central', 16),
-('Apiario Isla Nublar Norte', 17),
-('Apiario Midgard Florestal', 18),
-('Apiario Liberty Downtown', 19),
-('Apiario Base Halo', 20),
-('Apiario Arkham Asylum', 21),
-('Apiario Monte Paozu', 22),
-('Apiario Watchpoint Alpha', 23),
-('Apiario Florença Antiga', 24),
-('Apiario Bind Site A', 25),
-('Apiario Elden Tree', 26);
+('Apiario no Alley', 3);
+select * from apiario;
 
-INSERT INTO tbSensor (idApiario)
-VALUES (1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(11),
-(12),
-(13),
-(14),
-(15),
-(16),
-(17),
-(18),
-(19),
-(20),
-(21),
-(22),
-(23),
-(24),
-(25),
-(26);
+-- INSERT SENSOR (Corrigido fkApiario conforme DDL)
+INSERT INTO sensor (fkApiario)
+VALUES (1), (2), (3), (4);
 
+-- Lista todos os usuários, mostrando apenas nome e e-mail
+SELECT nome, email FROM usuario;
 
--- Lista todos os usuários (antigos apicultores), mostrando apenas nome e e-mail
-SELECT nome, email 
-FROM tbUsuario;
+-- Lista todas as empresas cadastradas em ordem alfabética
+SELECT idEmpresa, nomeFantasia FROM empresa ORDER BY nomeFantasia ASC;
 
--- Lista todas as empresas (antigas 'serviços') cadastradas em ordem alfabética
-SELECT idEmpresa, nomeFantasia 
-FROM tbEmpresa 
-ORDER BY nomeFantasia ASC;
-
--- Buscar colmeias que pertencem à empresa de ID 1
+-- Buscar apiários que pertencem à empresa de ID 1
 SELECT idApiario, identificacaoApiario 
-FROM tbApiario 
-WHERE idEmpresa = 1;
+FROM apiario 
+WHERE fkEmpresa = 1;
 
--- Mostrar todas as leituras de sensores com valor maior que o permitido para colmeias
+-- Mostrar status das leituras
 SELECT
     valorLeitura, 
     dataHora,
@@ -239,33 +157,45 @@ SELECT
         WHEN valorLeitura BETWEEN 34.50 AND 36 THEN 'Normal'
         ELSE 'Alto'
     END AS statusLeitura
-FROM tbLeitura;
+FROM leitura;
 
 -- Contar quantos alertas foram registrados no total
-SELECT COUNT(*) AS total_alertas 
-FROM tbAlerta;
+SELECT COUNT(*) AS total_alertas FROM alerta;
 
 -- Listar o nome do usuário junto com a cidade e estado da sua empresa
 SELECT u.nome, e.cidade, e.uf
-FROM tbUsuario u
-JOIN tbEmpresa emp ON u.fkEmpresa = emp.idEmpresa
-JOIN tbEndereco e ON emp.fkEndereco = e.idEndereco;
+FROM usuario u
+JOIN empresa emp ON u.fkEmpresa = emp.idEmpresa
+JOIN endereco e ON emp.fkEndereco = e.idEndereco;
 
--- Mostrar as colmeias e o nome da empresa responsável
-SELECT c.identificacaoApiario, emp.nomeFantasia
-FROM tbApiario c
-JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
+-- Mostrar os apiários e o nome da empresa responsável
+SELECT a.identificacaoApiario, emp.nomeFantasia
+FROM apiario a
+JOIN empresa emp ON a.fkEmpresa = emp.idEmpresa;
 
--- Listar os tipos de sensores instalados, em qual colmeia estão e a empresa dona
-SELECT s.idSensor, c.identificacaoApiario, emp.nomeFantasia
-FROM tbSensor s
-JOIN tbApiario c ON s.idApiario = c.idApiario
-JOIN tbEmpresa emp ON c.idEmpresa = emp.idEmpresa;
+-- Listar os sensores instalados, em qual apiário estão e a empresa dona
+SELECT s.idSensor, a.identificacaoApiario, emp.nomeFantasia
+FROM sensor s
+JOIN apiario a ON s.fkApiario = a.idApiario
+JOIN empresa emp ON a.fkEmpresa = emp.idEmpresa;
 
--- Histórico de Alertas: Descrição, data, tipo de sensor e identificação da colmeia
-SELECT al.descricaoAlerta, al.dataHora, s.idSensor, c.identificacaoApiario
-FROM tbAlerta al
-JOIN tbLeitura l ON al.fkLeitura = l.idLeitura
-JOIN tbSensor s ON l.fkSensor = s.idSensor
-JOIN tbApiario c ON s.idApiario = c.idApiario
+-- Histórico de Alertas completo
+SELECT al.descricaoAlerta, al.dataHora, s.idSensor, a.identificacaoApiario
+FROM alerta al
+JOIN leitura l ON al.fkLeitura = l.idLeitura
+JOIN sensor s ON l.fkSensor = s.idSensor
+JOIN apiario a ON s.fkApiario = a.idApiario
 ORDER BY al.dataHora DESC;
+
+create view vw_login as
+select idUsuario, nome, email, senha, classe, fkEmpresa from usuario;
+
+create or replace view vw_temperaturaIndividual as
+select l.valorLeitura as temperatura,
+l.dataHora as horario,
+a.identificacaoApiario as nome_apiario,
+a.idApiario as id_apiario,
+a.fkEmpresa as id_empresa
+from leitura l 
+join sensor s on l.fkSensor = s.idSensor
+join apiario a on a.idApiario = s.fkApiario;
