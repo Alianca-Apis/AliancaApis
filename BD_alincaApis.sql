@@ -53,10 +53,13 @@ CREATE TABLE alerta(
   idAlerta INT NOT NULL AUTO_INCREMENT,
   descricaoAlerta VARCHAR(100),
   dataHora DATETIME,
+  fkSensor INT NOT NULL,
   fkLeitura INT NOT NULL,
-  PRIMARY KEY (idAlerta, fkLeitura),
+  PRIMARY KEY (idAlerta, fkSensor, fkLeitura),
   CONSTRAINT fkLei FOREIGN KEY (fkLeitura)
-  REFERENCES leitura (idLeitura));
+  REFERENCES leitura (idLeitura),
+  CONSTRAINT fkSen2 FOREIGN KEY (fkSensor)
+  REFERENCES leitura (fkSensor));
 
 CREATE TABLE usuario(
   idUsuario INT NOT NULL AUTO_INCREMENT,
