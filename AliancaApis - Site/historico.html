@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard Aliança Apis</title>
+    <link rel="stylesheet" href="styleDashboard.css">
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
+        </div>
+    </header>
+
+    <!-- FIM HEADER-->
+
+    <section class="main">
+        <div class="sidebar">
+            <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="dashboard.html"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
+            <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
+            <a class="sidebar-active" href="historico.html"><i class="fa-solid"></i>Histórico</a>
+            <a href="#"><i class="fa-solid"></i>Sair</a>
+            <br>
+            <hr>
+            <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
+        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
+
+        </div><!-- sidebar-->
+        <div class="content content-apiario">
+            <div class="titulo-sessão">
+                <h2>Histórico de ocorrências</h2>
+                <hr>
+                <div class="filtro-historico" aria-label="Filtro de ordenação do histórico">
+                    <label for="ordenar-historico">Agrupar por</label>
+                    <select id="ordenar-historico" name="ordenar-historico">
+                        <option value="apiario">Apiário</option>
+                        <option value="mais-recente">Mais recente</option>
+                        <option value="mais-antigo">Mais antigo</option>
+                        <option value="temperatura-alta">Temperatura mais alta</option>
+                        <option value="temperatura-baixa">Temperatura mais baixa</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <!-- Sinalizadores de Temperatura -->
+            <!--o i é nossa classe de elemento-->
+            <!-- Alerta Critico -->
+            <div class="cards-apiarios ">
+                <div class="box-info apiario">
+                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
+                        class="box-info-single apiario">
+                        <div class="info-text">
+                            <h3>Apiário 2</h3>
+                            <p>Temperatura registrada: 29.4°C</p>
+                            <p>Data: 16/05/2026 07:21:52</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-info apiario">
+                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
+                        class="box-info-single apiario">
+                        <div class="info-text">
+                            <h3>Apiário 3</h3>
+                            <p>Temperatura registrada: 33°C</p>
+                            <p>Data: 15/05/2026 18:46:12</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-info apiario">
+                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
+                        class="box-info-single apiario">
+                        <div class="info-text">
+                            <h3>Apiário 2</h3>
+                            <p>Temperatura registrada: 31.9°C</p>
+                            <p>Data: 15/05/2026 12:58:23</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-info apiario">
+                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
+                        class="box-info-single apiario">
+                        <div class="info-text">
+                            <h3>Apiário 2</h3>
+                            <p>Temperatura registrada: 32.4°C</p>
+                            <p>Data: 13/05/2026 08:05:56</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div><!--content -->
+    </section> <!--main-->
+
+</body>
+
+</html>

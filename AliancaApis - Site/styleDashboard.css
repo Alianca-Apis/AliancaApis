@@ -206,11 +206,11 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     justify-content: space-between;
     border-radius: 10px;
     color: white;
-    padding: 30px;
-    width: calc(33.333% - 7px);
+    padding: 20px;
     margin: 0;
     align-items: center;
     border: 2px solid;
+    width: calc(33.333% - 7px);
 }
 
 .box-info-single svg {
@@ -267,17 +267,11 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 }
 
-
-
-
-
-
 .graficos {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
-
 
 .caixa {
 
@@ -317,4 +311,21 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 #meugrafico {
     color: black;
+}
+
+.content-apiario {
+    height: 100vh;
+}
+
+.cards-apiarios {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.apiario {
+    width: 300px;
+    margin: 10px 0 10px 0;
+    display: block;
+
 }
