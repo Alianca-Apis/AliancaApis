@@ -140,56 +140,6 @@ select * from apiario;
 INSERT INTO sensor (fkApiario)
 VALUES (1), (2), (3), (4);
 
--- Lista todos os usuários, mostrando apenas nome e e-mail
-SELECT nome, email FROM usuario;
-
--- Lista todas as empresas cadastradas em ordem alfabética
-SELECT idEmpresa, nomeFantasia FROM empresa ORDER BY nomeFantasia ASC;
-
--- Buscar apiários que pertencem à empresa de ID 1
-SELECT idApiario, identificacaoApiario 
-FROM apiario 
-WHERE fkEmpresa = 1;
-
--- Mostrar status das leituras
-SELECT
-    valorLeitura, 
-    dataHora,
-    CASE 
-        WHEN valorLeitura < 34.50 THEN 'Baixo'
-        WHEN valorLeitura BETWEEN 34.50 AND 36 THEN 'Normal'
-        ELSE 'Alto'
-    END AS statusLeitura
-FROM leitura;
-
--- Contar quantos alertas foram registrados no total
-SELECT COUNT(*) AS total_alertas FROM alerta;
-
--- Listar o nome do usuário junto com a cidade e estado da sua empresa
-SELECT u.nome, e.cidade, e.uf
-FROM usuario u
-JOIN empresa emp ON u.fkEmpresa = emp.idEmpresa
-JOIN endereco e ON emp.fkEndereco = e.idEndereco;
-
--- Mostrar os apiários e o nome da empresa responsável
-SELECT a.identificacaoApiario, emp.nomeFantasia
-FROM apiario a
-JOIN empresa emp ON a.fkEmpresa = emp.idEmpresa;
-
--- Listar os sensores instalados, em qual apiário estão e a empresa dona
-SELECT s.idSensor, a.identificacaoApiario, emp.nomeFantasia
-FROM sensor s
-JOIN apiario a ON s.fkApiario = a.idApiario
-JOIN empresa emp ON a.fkEmpresa = emp.idEmpresa;
-
--- Histórico de Alertas completo
-SELECT al.descricaoAlerta, al.dataHora, s.idSensor, a.identificacaoApiario
-FROM alerta al
-JOIN leitura l ON al.fkLeitura = l.idLeitura
-JOIN sensor s ON l.fkSensor = s.idSensor
-JOIN apiario a ON s.fkApiario = a.idApiario
-ORDER BY al.dataHora DESC;
-
 create view vw_login as
 select idUsuario, nome, email, senha, classe, fkEmpresa from usuario;
 
@@ -202,3 +152,42 @@ a.fkEmpresa as id_empresa
 from leitura l 
 join sensor s on l.fkSensor = s.idSensor
 join apiario a on a.idApiario = s.fkApiario;
+
+select * from vw_temperaturaIndividual;
+
+create or replace view vw_kpi_ideal as
+select
+    dataHora,
+    COUNT(fkSensor) as quantidade_ideal
+from leitura 
+where temperatura between 34.5 and 36
+group by dataHora;
+
+create or replace view vw_kpi_alerta as
+select
+    dataHora,
+    COUNT(fkSensor) as quantidade_alerta
+from leitura 
+where (temperatura between 30 and 34.4) 
+   OR (temperatura between 36.1 and 40)
+group by dataHora;
+
+create or replace view vw_kpi_critico as
+select
+    dataHora,
+    COUNT(fkSensor) as quantidade_critica
+from leitura 
+where temperatura <= 29.9 or temperatura >= 40.1
+group by dataHora;
+
+create or replace view vw_alertas as
+select a.idAlerta,
+a.descricaoAlerta as descricao,
+a.dataHora as horario,
+l.temperatura as temperatura,
+e.idEmpresa
+from alerta a
+join leitura l on fkLeitura = idLeitura
+join sensor s on s.idSensor = l.fkSensor
+join apiario ap on ap.idApiario = s.fkApiario
+join empresa e on idEmpresa = ap.fkEmpresa;
