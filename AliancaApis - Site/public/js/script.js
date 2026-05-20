@@ -2,7 +2,7 @@ function entrar() {
     let email = ipt_email.value;
     let senha = ipt_senha.value;
     if (email == "usuario@aliacaapis.com" && senha == "urubu100") {
-        window.location.href = "dashboard.html";
+        window.location.href = "./dashboard/dashboard.html";
     } else {
         alert("Informações incorretas!");
     }
