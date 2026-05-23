@@ -1,22 +1,43 @@
-function entrar() {
-    let email = ipt_email.value;
-    let senha = ipt_senha.value;
-    if (email == "usuario@aliacaapis.com" && senha == "urubu100") {
-        window.location.href = "./dashboard/dashboard.html";
-    } else {
-        alert("Informações incorretas!");
+async function entrar() {
+    const email = ipt_email.value;
+    const senha = ipt_senha.value;
+
+    try {
+        const resposta = await fetch("http://localhost:3333/usuarios/autenticar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        });
+
+        if (resposta.ok) {
+            const usuario = await resposta.json();
+            sessionStorage.ID_USUARIO = usuario.id;
+            sessionStorage.NOME_USUARIO = usuario.nome;
+            sessionStorage.EMAIL_USUARIO = usuario.email;
+            sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.aquarios && usuario.aquarios[0] && usuario.aquarios[0].fk_empresa) || "";
+
+            window.location.href = "./dashboard/dashboard.html";
+        } else {
+            const erro = await resposta.text();
+            div_erro.innerHTML = erro;
+        }
+    } catch (err) {
+        div_erro.innerHTML = "Erro de conexão: " + err.message;
     }
-    console.log(senha)
 }
 
-function cadastrar() {
-    let nome = ipt_nome.value;
+async function cadastrar() {
+    let nome = ipt_nome.value.trim();
+    let sobrenome = ipt_sobrenome.value.trim();
     let dataNasc = ipt_dataNasc.value;
-    let cpf = ipt_cpf.value;
-    let email = ipt_email.value;
+    let cpf = ipt_cpf.value.trim();
+    let email = ipt_email.value.trim();
     let senha = ipt_senha.value;
     let confirmacaoSenha = ipt_confirmacaoSenha.value;
-    let confirmacaoCode = ipt_confirmacaoCodigo.value;
+    let confirmacaoCode = ipt_confirmacaoCodigo.value.trim();
 
     let condicoesErro = [
         nome == "" || cpf == "" || email == "" || senha == "" || confirmacaoSenha == "",
@@ -48,7 +69,29 @@ function cadastrar() {
             return false;
         }
     }
-    alert('INDISPONÍVEL NO MOMENTO, TENTE NOVAMENTE MAIS TARDE')
+    try {
+        const resposta = await fetch("http://localhost:3333/usuarios/cadastrar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nomeServer: `${nome} ${sobrenome}`.trim(),
+                emailServer: email,
+                senhaServer: senha,
+                idEmpresaVincularServer: Number(confirmacaoCode),
+                fkEmpresaServer: Number(confirmacaoCode),
+                confirmacaoCodeServer: Number(confirmacaoCode)
+            })
+        });
+
+        if (resposta.ok) {
+            window.location.href = "login.html";
+        } else {
+            const erro = await resposta.text();
+            div_erro.innerHTML = erro;
+        }
+    } catch (erro) {
+        div_erro.innerHTML = "Erro de conexão: " + erro.message;
+    }
 }
 
 let enxamePreco = 450;
@@ -102,7 +145,7 @@ function calculo(){
 
         divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%</b><br>`;
 
-    } 
+    }
     else {
 
         if (kilos < 45) {
