@@ -22,17 +22,14 @@ function autenticar(req, res) {
 
                         aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
                             .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
-                                    res.json({
-                                        id: resultadoAutenticar[0].id,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senha,
-                                        aquarios: resultadoAquarios
-                                    });
-                                } else {
-                                    res.status(204).json({ aquarios: [] });
-                                }
+                                res.json({
+                                    id: resultadoAutenticar[0].idUsuario,
+                                    email: resultadoAutenticar[0].email,
+                                    nome: resultadoAutenticar[0].nome,
+                                    senha: resultadoAutenticar[0].senha,
+                                    empresaId: resultadoAutenticar[0].empresaId,
+                                    aquarios: resultadoAquarios
+                                });
                             })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -56,7 +53,9 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var fkEmpresa = req.body.idEmpresaVincularServer;
+    var fkEmpresa = req.body.idEmpresaVincularServer ?? req.body.fkEmpresaServer ?? req.body.confirmacaoCodeServer;
+
+    fkEmpresa = Number(fkEmpresa);
 
     // Faça as validações dos valores
     if (nome == undefined) {
