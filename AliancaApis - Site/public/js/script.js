@@ -17,7 +17,7 @@ async function entrar() {
             sessionStorage.ID_USUARIO = usuario.id;
             sessionStorage.NOME_USUARIO = usuario.nome;
             sessionStorage.EMAIL_USUARIO = usuario.email;
-            sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.aquarios && usuario.aquarios[0] && usuario.aquarios[0].fk_empresa) || "";
+            sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.apiarios && usuario.apiarios[0] && usuario.apiarios[0].fk_empresa) || "";
 
             window.location.href = "./dashboard/dashboard.html";
         } else {

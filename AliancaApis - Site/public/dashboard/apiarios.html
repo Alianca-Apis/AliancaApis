@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/styleDashboard.css">
     <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
             <a href="dashboard.html"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
             <a class="sidebar-active" href="#"><i class="fa-solid"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid"></i>Histórico</a>
-            <a href="#"><i class="fa-solid"></i>Sair</a>
+            <a href="../login.html"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
             <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
@@ -41,8 +42,8 @@
             <!-- Sinalizadores de Temperatura -->
             <!--o i é nossa classe de elemento-->
             <!-- Alerta Critico -->
-            <div class="cards-apiarios">
-                <div class="box-info apiario">
+            <div id="container_cards_apiarios" class="cards-apiarios">
+            <!--<div class="box-info apiario">
                     <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
                         class="box-info-single apiario">
                         <div class="info-text">
@@ -81,7 +82,7 @@
                             <p>Temperatura média: 35.7°C</p>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </div><!--content -->
@@ -90,3 +91,45 @@
 </body>
 
 </html>
+<script>
+    validarSessao()
+    async function obterdados(empresaId) {
+        if (!empresaId) {
+            window.location = "../login.html";
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`/apiarios/${empresaId};`);
+            if (resposta.status === 204) {
+                // nenhum apiário — limpar container e mostrar mensagem
+                return;
+            }
+            if (!resposta.ok) {
+                // tratar erro HTTP (4xx/5xx)
+                console.error("Erro ao buscar apiários:", resposta.status);
+                return;
+            }
+            const lista = await resposta.json(); // array de apiários
+            sessionStorage.APIARIOS = JSON.stringify(lista.map(item => ({ 
+                id: item.idApiario 
+            })));
+            lista.forEach(item => {
+                document.getElementById("container_cards_apiarios") += `
+                <div class="box-info apiario">
+                    <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
+                        class="box-info-single apiario">
+                        <div class="info-text">
+                            <h3>Apiário ${item}</h3>
+                            <p>Temperatura atual: 36°C</p>
+                            <p>Temperatura média: 35.8°C</p>
+                        </div>
+                    </div>
+                </div>`
+            });
+        } catch (erro) {
+            console.error("Falha de rede ou CORS:", erro);
+        }
+    };
+obterdados()
+</script>

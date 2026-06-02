@@ -1,9 +1,13 @@
 var database = require("../database/config");
 
-function buscarAquariosPorEmpresa(empresaId) {
-
-  var instrucaoSql = `SELECT * FROM apiario a WHERE fkEmpresa = ${empresaId}`;
-
+function buscarApiariosPorEmpresa(empresaId) {
+  var instrucaoSql = `
+  SELECT a.idApiario, l.temperatura, AVG(l.temperatura) FROM apiario a
+  JOIN sensor s ON s.fkApiario = a.idApiario
+  JOIN leitura l ON l.fkSensor = s.idSensor
+  WHERE idApiario = ${apiarioId} AND a.fkEmpresa = ${empresaId}
+  GROUP BY a.idApiario, l.temperatura;
+  `
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -18,6 +22,6 @@ function cadastrar(empresaId, descricao) {
 
 
 module.exports = {
-  buscarAquariosPorEmpresa,
+  buscarApiariosPorEmpresa,
   cadastrar
 }

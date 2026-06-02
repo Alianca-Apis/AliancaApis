@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+var apiarioModel = require("../models/apiarioModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,15 +20,15 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
+                        apiarioModel.buscarApiariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                            .then((resultadoApiarios) => {
                                 res.json({
                                     id: resultadoAutenticar[0].idUsuario,
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
                                     empresaId: resultadoAutenticar[0].empresaId,
-                                    aquarios: resultadoAquarios
+                                    apiarios: resultadoApiarios
                                 });
                             })
                     } else if (resultadoAutenticar.length == 0) {
