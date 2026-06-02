@@ -1,6 +1,8 @@
 async function entrar() {
+    console.log("entrou no entrar")
     const email = ipt_email.value;
     const senha = ipt_senha.value;
+
 
     try {
         const resposta = await fetch("http://localhost:3333/usuarios/autenticar", {
@@ -9,17 +11,22 @@ async function entrar() {
             body: JSON.stringify({
                 emailServer: email,
                 senhaServer: senha
+    
             })
         });
-
+        console.log("entrou fetch")
+        
         if (resposta.ok) {
             const usuario = await resposta.json();
+            console.log(`usuario é ${usuario}`)
             sessionStorage.ID_USUARIO = usuario.id;
             sessionStorage.NOME_USUARIO = usuario.nome;
             sessionStorage.EMAIL_USUARIO = usuario.email;
             sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.apiarios && usuario.apiarios[0] && usuario.apiarios[0].fk_empresa) || "";
-
+            sessionStorage.CLASSE = usuario.classe;         
+            
             window.location.href = "./dashboard/dashboard.html";
+            console.log(resposta)
         } else {
             const erro = await resposta.text();
             div_erro.innerHTML = erro;
