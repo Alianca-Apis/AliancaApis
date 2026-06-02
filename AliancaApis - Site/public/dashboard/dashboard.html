@@ -25,6 +25,7 @@
             <a class="sidebar-active" href="#"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
             <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid"></i>Histórico</a>
+            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid" id="aba-gestor"> </i>Cadastro</a>
             <a href="#"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
@@ -39,9 +40,9 @@
                 <br>
                 <p><i class="fa-solid fa-house"></i>/Dashboard Apiários</p>
             </div>
-                 <!-- Sinalizadores de Temperatura -->
-                <!--o i é nossa classe de elemento-->
-                <!-- Alerta Critico -->
+            <!-- Sinalizadores de Temperatura -->
+            <!--o i é nossa classe de elemento-->
+            <!-- Alerta Critico -->
             <div class="box-info">
                 <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
                     class="box-info-single">
@@ -60,7 +61,7 @@
                     </div>
                 </div>
 
-                    <!-- Temperatura normal -->
+                <!-- Temperatura normal -->
 
                 <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
                     class="box-info-single">
@@ -106,6 +107,16 @@
 </html>
 <script>
 
+    var classeUsuario = sessionStorage.CLASSE;
+    function verificarAcesso() {
+
+        console.log(classeUsuario)
+        if (classeUsuario == "gestor") {
+            document.getElementById("aba-gestor").style.display = "block";
+        }
+    }
+    verificarAcesso()
+
     function mostrar() {
         let texto = ipt_texto.value;
 
@@ -116,7 +127,7 @@
     let tudo = document.getElementById("meugrafico");
     let barra = document.getElementById("meugraficobarras");
 
-    new Chart()
+    // new Chart()
 
     // grafico de linha que mostra a temperatura do apiario em tempo real 5 em 5 minutos 
 
@@ -156,16 +167,22 @@
             }]
         },
         options: {
-            color: 'black',
+            plugins: {
+                legend: {
+                    labels: { color: 'black' }
+                }
+            },
             scales: {
-                color: 'black',
-
+                x: { ticks: { color: 'black' } },
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: { color: 'black' }
                 }
             }
         }
     });
+
+
 
 
 </script>
