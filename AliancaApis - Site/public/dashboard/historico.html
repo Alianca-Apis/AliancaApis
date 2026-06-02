@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="../css/styleDashboard.css">
     <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
 </head>
 
 <body>
     <header class="navbar">
         <div class="logo">
-            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
+            <img src="../assets/imgs/logo-main.png" alt="Aliança Apis Logo">
         </div>
     </header>
 
@@ -25,7 +26,7 @@
             <a href="dashboard.html"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
             <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
             <a class="sidebar-active" href="historico.html"><i class="fa-solid"></i>Histórico</a>
-            <a href="/public/cadastro.html"><i class="fa-solid"></i>cadastro</a>
+            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid"></i>cadastro</a>
             <a href="#"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
@@ -49,55 +50,71 @@
                 </div>
                 <br>
             </div>
-            <!-- Sinalizadores de Temperatura -->
             <!--o i é nossa classe de elemento-->
             <!-- Alerta Critico -->
-            <div class="cards-apiarios ">
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="box-info-single apiario">
-                        <div class="info-text">
-                            <h3>Apiário 2</h3>
-                            <p>Temperatura registrada: 29.4°C</p>
-                            <p>Data: 16/05/2026 07:21:52</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="box-info-single apiario">
-                        <div class="info-text">
-                            <h3>Apiário 3</h3>
-                            <p>Temperatura registrada: 33°C</p>
-                            <p>Data: 15/05/2026 18:46:12</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="box-info-single apiario">
-                        <div class="info-text">
-                            <h3>Apiário 2</h3>
-                            <p>Temperatura registrada: 31.9°C</p>
-                            <p>Data: 15/05/2026 12:58:23</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="box-info-single apiario">
-                        <div class="info-text">
-                            <h3>Apiário 2</h3>
-                            <p>Temperatura registrada: 32.4°C</p>
-                            <p>Data: 13/05/2026 08:05:56</p>
-                        </div>
-                    </div>
-                </div>
+            <div id="historico_alertas" class="cards-apiarios">
             </div>
-            
+
 
         </div><!--content -->
     </section> <!--main-->
+
+<script>
+
+    const historicoContainer = document.getElementById("historico_alertas");
+
+    function formatarDataHora(dataHora) {
+        if (!dataHora) {
+            return "Data não informada";
+        }
+
+        const data = new Date(dataHora);
+
+        if (Number.isNaN(data.getTime())) {
+            return String(dataHora);
+        }
+
+        return data.toLocaleString("pt-BR");
+    }
+
+    function criarCardHistorico(alerta) {
+        return `
+            <div class="box-info apiario">
+                <div class="card-unidade apiario vermelho">
+                    <div class="info-text">
+                        <h3>Alerta</h3>
+                        <p>Descrição: ${alerta.descricaoAlerta}</p>
+                        <p>Data: ${formatarDataHora(alerta.dataHora)}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    async function carregarHistoricoAlertas() {
+        try {
+            const resposta = await fetch("/avisos/historico-alertas");
+
+            if (resposta.status === 204) {
+                historicoContainer.innerHTML = "<p>Nenhum alerta registrado.</p>";
+                return;
+            }
+
+            if (!resposta.ok) {
+                historicoContainer.innerHTML = "<p>Não foi possível carregar o histórico.</p>";
+                return;
+            }
+
+            const historico = await resposta.json();
+            historicoContainer.innerHTML = historico.map(criarCardHistorico).join("")
+        } catch (erro) {
+            console.error("Erro ao carregar histórico de alertas:", erro);
+            historicoContainer.innerHTML = "<p>Erro de conexão ao carregar o histórico.</p>";
+        }
+    }
+
+    carregarHistoricoAlertas();
+</script>
 
 </body>
 

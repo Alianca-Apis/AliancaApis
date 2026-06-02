@@ -106,7 +106,7 @@ button {
     z-index: 1000;      
 
     background-color: #f9f6edc5; 
-    background-image: url(./assets/imgs/colmeia.png);
+    background-image: url(../assets/imgs/colmeia.png);
     background-size: contain;
     
     backdrop-filter: blur(10px); 
@@ -340,7 +340,7 @@ button {
     align-items: center;
     padding: 50px;
     gap: 80px;
-    background-image: url(./assets/imgs/colmeiaGrande.png);
+    background-image: url(../assets/imgs/colmeiaGrande.png);
     background-size: contain;
     background-origin: content-box;
     background-repeat: no-repeat;

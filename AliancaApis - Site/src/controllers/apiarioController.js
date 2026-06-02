@@ -1,9 +1,9 @@
 var apiarioModel = require("../models/apiarioModel");
 
 function buscarApiariosPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
+  var empresaId = req.params.empresaId;
 
-  apiarioModel.buscarApiariosPorEmpresa(idUsuario).then((resultado) => {
+  apiarioModel.buscarApiariosPorEmpresa(empresaId).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {

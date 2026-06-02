@@ -14,7 +14,7 @@
 <body>
     <header class="navbar">
         <div class="logo">
-            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
+            <img src="../assets/imgs/logo-main.png" alt="Aliança Apis Logo">
         </div>
     </header>
 
@@ -26,7 +26,7 @@
             <a href="dashboard.html"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
             <a class="sidebar-active" href="#"><i class="fa-solid"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid"></i>Histórico</a>
-            <a href="/public/cadastro.html"><i class="fa-solid"></i>cadastro</a>
+            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid"></i>cadastro</a>
             <a href="../login.html"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
@@ -44,9 +44,9 @@
             <!--o i é nossa classe de elemento-->
             <!-- Alerta Critico -->
             <div id="container_cards_apiarios" class="cards-apiarios">
-            <!--<div class="box-info apiario">
+                <!--<div class="box-info apiario">
                     <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
-                        class="box-info-single apiario">
+                        class="card-unidade apiario">
                         <div class="info-text">
                             <h3>Apiário 1</h3>
                             <p>Temperatura atual: 36°C</p>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="box-info apiario">
                     <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="box-info-single apiario">
+                        class="card-unidade apiario">
                         <div class="info-text">
                             <h3>Apiário 2</h3>
                             <p>Temperatura atual: 29.4°C</p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="box-info apiario">
                     <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow; color: #5A4A00"
-                        class="box-info-single apiario">
+                        class="card-unidade apiario">
                         <div class="info-text">
                             <h3>Apiário 3</h3>
                             <p>Temperatura atual: 34°C</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="box-info apiario">
                     <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
-                        class="box-info-single apiario">
+                        class="card-unidade apiario">
                         <div class="info-text">
                             <h3>Apiário 4</h3>
                             <p>Temperatura atual: 35.8°C</p>
@@ -89,48 +89,86 @@
         </div><!--content -->
     </section> <!--main-->
 
+    <script>
+        const card = document.getElementById("container_cards_apiarios");
+
+        function obterClasseTemperatura(temperatura) {
+            const valor = Number(temperatura);
+
+            if (valor >= 35 && valor <= 36.5) {
+                return "verde";
+            }
+            if ((valor > 36.5 && valor <= 38.5) || (valor >= 33 && valor < 35)) {
+                return "amarelo";
+            }
+            return "vermelho";
+        }
+
+        function formatarTemperatura(valor) {
+            if (valor == null || valor == undefined || valor == "" || Number.isNaN(Number(valor))) {
+                return "Sem leitura";
+            }
+
+            return `${Number(valor).toFixed(1)}°C`;
+        }
+
+        function criarCard(apiario) {
+            const temperaturaAtual = apiario.temperaturaAtual;
+            const classeTemperatura = obterClasseTemperatura(temperaturaAtual);
+            const temperaturaMedia = apiario.temperaturaMedia;
+
+            return `
+            <div class="box-info apiario">
+                <div id="card_${apiario.idApiario}" class="card-unidade apiario ${classeTemperatura}">
+                    <div class="info-text">
+                        <h3>Apiário ${apiario.idApiario}</h3>
+                        <h5>${apiario.descricao}</h5>
+                        <p id="temp_aquario_${apiario.idApiario}">Temperatura atual: ${formatarTemperatura(temperaturaAtual)}</p>
+                        <p>Temperatura média: ${formatarTemperatura(temperaturaMedia)}</p>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        async function carregarApiarios() {
+            const empresaId = sessionStorage.EMPRESA_ID;
+
+            if (!empresaId) {
+                window.location = "../login.html";
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`/apiarios/${empresaId}`);
+
+                if (resposta.status === 204) {
+                    card.innerHTML = "<p>Nenhum apiário cadastrado para esta empresa.</p>";
+                    return;
+                }
+                if (!resposta.ok) {
+                    card.innerHTML = "<p>Não foi possível carregar os apiários.</p>";
+                    return;
+                }
+
+                const lista = await resposta.json();
+
+                sessionStorage.APIARIOS = JSON.stringify(
+                    lista.map((item) => ({
+                        id: item.idApiario,
+                        descricao: item.descricao
+                    }))
+                );
+
+                card.innerHTML = lista.map(criarCard).join("");
+            } catch (erro) {
+                console.error("Falha ao buscar apiários:", erro);
+                card.innerHTML = "<p>Erro de conexão ao carregar os apiários.</p>";
+            }
+        }
+
+        carregarApiarios();
+    </script>
+
 </body>
 
 </html>
-<script>
-    validarSessao()
-    async function obterdados(empresaId) {
-        if (!empresaId) {
-            window.location = "../login.html";
-            return;
-        }
-
-        try {
-            const resposta = await fetch(`/apiarios/${empresaId};`);
-            if (resposta.status === 204) {
-                // nenhum apiário — limpar container e mostrar mensagem
-                return;
-            }
-            if (!resposta.ok) {
-                // tratar erro HTTP (4xx/5xx)
-                console.error("Erro ao buscar apiários:", resposta.status);
-                return;
-            }
-            const lista = await resposta.json(); // array de apiários
-            sessionStorage.APIARIOS = JSON.stringify(lista.map(item => ({ 
-                id: item.idApiario 
-            })));
-            lista.forEach(item => {
-                document.getElementById("container_cards_apiarios") += `
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
-                        class="box-info-single apiario">
-                        <div class="info-text">
-                            <h3>Apiário ${item}</h3>
-                            <p>Temperatura atual: 36°C</p>
-                            <p>Temperatura média: 35.8°C</p>
-                        </div>
-                    </div>
-                </div>`
-            });
-        } catch (erro) {
-            console.error("Falha de rede ou CORS:", erro);
-        }
-    };
-obterdados()
-</script>

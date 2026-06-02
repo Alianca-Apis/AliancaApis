@@ -1,5 +1,19 @@
 var avisoModel = require("../models/avisoModel");
 
+function listarHistoricoAlertas(req, res) {
+    avisoModel.listarHistoricoAlertas().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar o histórico de alertas: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function listar(req, res) {
     avisoModel.listar().then(function (resultado) {
         if (resultado.length > 0) {
@@ -127,6 +141,7 @@ function deletar(req, res) {
 }
 
 module.exports = {
+    listarHistoricoAlertas,
     listar,
     listarPorUsuario,
     pesquisarDescricao,

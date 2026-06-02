@@ -50,7 +50,7 @@ h3 {
     z-index: 1000;
 
     background-color: #f9f6edc5;
-    background-image: url(./assets/imgs/colmeia.png);
+    background-image: url(../assets/imgs/colmeia.png);
     background-size: contain;
 
     backdrop-filter: blur(10px);
@@ -201,7 +201,7 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 }
 
-.box-info-single {
+.card-unidade {
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
@@ -213,7 +213,25 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     width: calc(33.333% - 7px);
 }
 
-.box-info-single svg {
+.verde {
+    background-color: rgba(20, 252, 32, 0.658);
+    border-color: green;
+    color: #1A4d1A;
+}
+
+.amarelo {
+    background-color: rgba(255, 238, 0, 0.301);
+    border-color: yellow;
+    color: #5A4A00;
+}
+
+.vermelho {
+    background-color: rgba(216, 13, 13, 0.459);
+    border-color: red;
+    color: #7A1A1A;
+}
+
+.card-unidade svg {
     font-size: 28px;
     display: flex;
 
