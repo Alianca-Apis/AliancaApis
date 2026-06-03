@@ -27,7 +27,7 @@
             <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
             <a class="sidebar-active" href="historico.html"><i class="fa-solid"></i>Histórico</a>
             <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid"></i>cadastro</a>
-            <a href="#"><i class="fa-solid"></i>Sair</a>
+            <a href="../login.html"><i class="fa-solid"></i>Sair</a>
             <br>
             <hr>
             <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
@@ -39,13 +39,14 @@
                 <h2>Histórico de ocorrências</h2>
                 <hr>
                 <div class="filtro-historico" aria-label="Filtro de ordenação do histórico">
-                    <label for="ordenar-historico">Agrupar por</label>
+                    <label for="ordenar-historico">Ordenar por</label>
                     <select id="ordenar-historico" name="ordenar-historico">
-                        <option value="apiario">Apiário</option>
-                        <option value="mais-recente">Mais recente</option>
-                        <option value="mais-antigo">Mais antigo</option>
-                        <option value="temperatura-alta">Temperatura mais alta</option>
-                        <option value="temperatura-baixa">Temperatura mais baixa</option>
+                        <option value="dataHora">Data</option>
+                        <option value="descricaoAlerta">Apiário</option>
+                    </select>
+                    <select id="ordenar-historico2" name="ordenar-historico2">
+                        <option value="DESC">Decrescente</option>
+                        <option value="ASC">Crescente</option>
                     </select>
                 </div>
                 <br>
@@ -59,62 +60,77 @@
         </div><!--content -->
     </section> <!--main-->
 
-<script>
+    <script>
 
-    const historicoContainer = document.getElementById("historico_alertas");
+        const historicoContainer = document.getElementById("historico_alertas");
 
-    function formatarDataHora(dataHora) {
-        if (!dataHora) {
-            return "Data não informada";
+        function formatarDataHora(dataHora) {
+            if (!dataHora) {
+                return "Data não informada";
+            }
+
+            const data = new Date(dataHora);
+
+            if (Number.isNaN(data.getTime())) {
+                return String(dataHora);
+            }
+
+            return data.toLocaleString("pt-BR");
         }
 
-        const data = new Date(dataHora);
+        function criarCardHistorico(alerta) {
+            const idApiario = alerta.idApiario;
+            const descricaoAlerta = alerta.descricaoAlerta ?? "Sem descrição";
+            const dataHora = alerta.dataHora
 
-        if (Number.isNaN(data.getTime())) {
-            return String(dataHora);
-        }
-
-        return data.toLocaleString("pt-BR");
-    }
-
-    function criarCardHistorico(alerta) {
-        return `
+            return `
             <div class="box-info apiario">
                 <div class="card-unidade apiario vermelho">
                     <div class="info-text">
-                        <h3>Alerta</h3>
-                        <p>Descrição: ${alerta.descricaoAlerta}</p>
-                        <p>Data: ${formatarDataHora(alerta.dataHora)}</p>
+                        <h3>Apiário ${idApiario}</h3>
+                        <p>Descrição: ${descricaoAlerta}</p>
+                        <p>Data: ${formatarDataHora(dataHora)}</p>
                     </div>
                 </div>
             </div>
         `;
-    }
-
-    async function carregarHistoricoAlertas() {
-        try {
-            const resposta = await fetch("/avisos/historico-alertas");
-
-            if (resposta.status === 204) {
-                historicoContainer.innerHTML = "<p>Nenhum alerta registrado.</p>";
-                return;
-            }
-
-            if (!resposta.ok) {
-                historicoContainer.innerHTML = "<p>Não foi possível carregar o histórico.</p>";
-                return;
-            }
-
-            const historico = await resposta.json();
-            historicoContainer.innerHTML = historico.map(criarCardHistorico).join("")
-        } catch (erro) {
-            console.error("Erro ao carregar histórico de alertas:", erro);
-            historicoContainer.innerHTML = "<p>Erro de conexão ao carregar o histórico.</p>";
         }
-    }
 
-    carregarHistoricoAlertas();
-</script>
+        function montarQueryHistorico() {
+            const ordenarPor = document.getElementById("ordenar-historico").value;
+            const ordem = document.getElementById("ordenar-historico2").value;
+            const empresaId = sessionStorage.EMPRESA_ID;
+
+            return `?ordenarPor=${ordenarPor}&ordem=${ordem}&empresaId=${empresaId}`;
+        }
+
+        async function carregarHistoricoAlertas() {
+            try {
+                const resposta = await fetch(`/avisos/historico-alertas${montarQueryHistorico()}`);
+
+                if (resposta.status === 204) {
+                    historicoContainer.innerHTML = "<p>Nenhum alerta registrado.</p>";
+                    return;
+                }
+
+                if (!resposta.ok) {
+                    historicoContainer.innerHTML = "<p>Não foi possível carregar o histórico.</p>";
+                    return;
+                }
+
+                const historico = await resposta.json();
+                historicoContainer.innerHTML = historico.map(criarCardHistorico).join("")
+            } catch (erro) {
+                console.error("Erro ao carregar histórico de alertas:", erro);
+                historicoContainer.innerHTML = "<p>Erro de conexão ao carregar o histórico.</p>";
+            }
+        }
+
+        document.getElementById("ordenar-historico").addEventListener("change", carregarHistoricoAlertas);
+        document.getElementById("ordenar-historico2").addEventListener("change", carregarHistoricoAlertas);
+
+        carregarHistoricoAlertas();
+    </script>
 
 </body>
 

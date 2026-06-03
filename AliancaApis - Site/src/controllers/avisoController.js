@@ -1,7 +1,11 @@
 var avisoModel = require("../models/avisoModel");
 
 function listarHistoricoAlertas(req, res) {
-    avisoModel.listarHistoricoAlertas().then(function (resultado) {
+    var ordenarPor = req.query.ordenarPor;
+    var ordem = req.query.ordem;
+    var empresaId = req.query.empresaId;
+
+    avisoModel.listarHistoricoAlertas(ordenarPor, ordem, empresaId).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

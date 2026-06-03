@@ -1,12 +1,18 @@
 var database = require("../database/config");
 
-function listarHistoricoAlertas(filtro) {
+function listarHistoricoAlertas(filtro1, filtro2, fkEmpresa) {
+
     var instrucaoSql = `
         SELECT
-            descricaoAlerta,
-            dataHora
-        FROM alerta
-        ORDER BY ${filtro} DESC;
+            a.descricaoAlerta,
+            a.dataHora,
+            ap.idApiario
+        FROM alerta a
+            JOIN leitura l ON l.idLeitura = a.fkLeitura
+            JOIN sensor s ON s.idSensor = a.fkSensor
+            JOIN apiario ap ON ap.idApiario = s.fkApiario
+        WHERE ap.fkEmpresa = ${fkEmpresa}
+        ORDER BY ${filtro1} ${filtro2};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
