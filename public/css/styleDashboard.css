@@ -106,6 +106,7 @@ a {
     text-decoration: none;
     padding: 10px 15px;
     color: rgb(57, 0, 83);
+    transition: 0.2s;
 }
 
 .sidebar a>svg {
@@ -114,19 +115,22 @@ a {
 
 .sidebar a.sidebar-active {
     border-left: 5px solid #9a6e2a;
-    background-color: #555;
+    background-color: #55555510;
     color: #9a6e2a;
     font-weight: bold;
 }
 
 .sidebar a.sidebar-active svg {
     color: rgb(57, 0, 83);
+}
 
+.sidebar a i {
+    margin-right: 8px;
 }
 
 .sidebar a:hover {
     border-left: 5px solid #9a6e2a;
-    background-color: rgb(197, 180, 202);
+    background-color: #c5b4ca;
     color: #9a6e2a;
     font-weight: bold;
 }
@@ -143,7 +147,7 @@ a {
 .content {
     flex: 1;
     width: auto;
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 

@@ -10,29 +10,19 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
-    <header class="navbar">
-        <div class="logo">
-            <img src="../assets/imgs/logo-main.png" alt="Aliança Apis Logo">
-        </div>
-    </header>
-
-    <!-- FIM HEADER-->
-
+<body style="margin-top: 0px;">
     <section class="main">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
-            <a class="sidebar-active" href="#"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
-            <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
-            <a href="historico.html"><i class="fa-solid"></i>Histórico</a>
-            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid" id="aba-gestor"></i>Cadastro</a>
-            <a href="../login.html"><i class="fa-solid"></i>Sair</a>
+            <a class="sidebar-active" href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Relatórios</a>
+            <a href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
+            <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
+            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid fa-user-plus"></i>Cadastro</a>
+            <a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
             <br>
             <hr>
-            <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
-        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
+        </div>
 
-        </div><!-- sidebar-->
         <div class="content">
             <div class="titulo-sessão">
                 <h2>Dashboard</h2>
@@ -105,18 +95,9 @@
 </body>
 
 </html>
-<!-- <script>
 
-    var classeUsuario = sessionStorage.CLASSE;
-    function verificarAcesso() {
-
-        console.log(classeUsuario)
-        if (classeUsuario == "gestor") {
-            document.getElementById("aba-gestor").style.display = "block";
-        }
-    }
-    verificarAcesso()
-
+<script src="../js/gestor.js"></script>
+<script>
     function mostrar() {
         let texto = ipt_texto.value;
 
@@ -185,11 +166,11 @@
 
 
 
-</script> -->
+</script>
 
- <!-- WEB DATA VIZ -->
+<!-- WEB DATA VIZ -->
 <script>
-   
+
 
     let proximaAtualizacao;
 
@@ -198,7 +179,7 @@
     function exibirAquariosDoUsuario() {
 
         console.log("AQUARIOS:", sessionStorage.AQUARIOS);
-        
+
         var aquarios = JSON.parse(sessionStorage.AQUARIOS);
         aquarios.forEach(item => {
             // document.getElementById("btnAquario").innerHTML += `
@@ -285,21 +266,21 @@
         }
 
         fetch(`/leitura/buscarLeitura/${id_apiario}`, { cache: 'no-store' })
-        
+
             .then(function (response) {
-            if (response.ok) {
-                response.json()
-                .then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+                if (response.ok) {
+                    response.json()
+                        .then(function (resposta) {
+                            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                            resposta.reverse();
 
-                    plotarGrafico(resposta, id_apiario);
+                            plotarGrafico(resposta, id_apiario);
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
@@ -320,19 +301,19 @@
             labels: labels,
             datasets: [
                 // {
-            //     label: 'Umidade',
-            //     data: [],
-            //     fill: false,
-            //     borderColor: 'rgb(75, 192, 192)',
-            //     tension: 0.1
-            // },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
+                //     label: 'Umidade',
+                //     data: [],
+                //     fill: false,
+                //     borderColor: 'rgb(75, 192, 192)',
+                //     tension: 0.1
+                // },
+                {
+                    label: 'Temperatura',
+                    data: [],
+                    fill: false,
+                    borderColor: 'rgb(199, 52, 52)',
+                    tension: 0.1
+                }]
         };
 
         console.log('----------------------------------------------')
@@ -382,47 +363,47 @@
 
         fetch(`/leitura/buscarLeitura/${id_apiario}`, { cache: 'no-store' })
             .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
+                if (response.ok) {
+                    response.json().then(function (novoRegistro) {
 
-                    obterdados(id_apiario);
-                    // alertar(novoRegistro, id_apiario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
+                        obterdados(id_apiario);
+                        // alertar(novoRegistro, id_apiario);
+                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                        console.log(`Dados atuais do gráfico:`);
+                        console.log(dados);
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${id_apiario}`)
-                    avisoCaptura.innerHTML = ""
+                        let avisoCaptura = document.getElementById(`avisoCaptura${id_apiario}`)
+                        avisoCaptura.innerHTML = ""
 
 
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+                        if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                            console.log("---------------------------------------------------------------")
+                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                            avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                            console.log("Horário do novo dado capturado:")
+                            console.log(novoRegistro[0].momento_grafico)
+                            console.log("Horário do último dado capturado:")
+                            console.log(dados.labels[dados.labels.length - 1])
+                            console.log("---------------------------------------------------------------")
+                        } else {
+                            // tirando e colocando valores no gráfico
+                            dados.labels.shift(); // apagar o primeiro
+                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+                            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                            dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-                        myChart.update();
-                    }
+                            myChart.update();
+                        }
 
+                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                        proximaAtualizacao = setTimeout(() => atualizarGrafico(id_apiario, dados, myChart), 2000);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(id_apiario, dados, myChart), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(id_apiario, dados, myChart), 2000);
-            }
-        })
+                }
+            })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });

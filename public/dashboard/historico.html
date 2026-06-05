@@ -11,29 +11,22 @@
     <script src="../js/sessao.js"></script>
 </head>
 
-<body>
-    <header class="navbar">
-        <div class="logo">
-            <img src="../assets/imgs/logo-main.png" alt="Aliança Apis Logo">
-        </div>
-    </header>
+<body style="margin-top: 0px;">
 
     <!-- FIM HEADER-->
 
     <section class="main">
-        <div class="sidebar">
-            <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
-            <a href="dashboard.html"><i class="fa-solid fa-wave-square"></i>Relatórios</a>
-            <a href="apiarios.html"><i class="fa-solid"></i>Apiários</a>
-            <a class="sidebar-active" href="historico.html"><i class="fa-solid"></i>Histórico</a>
-            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid"></i>cadastro</a>
-            <a href="../login.html"><i class="fa-solid"></i>Sair</a>
-            <br>
-            <hr>
-            <!-- se eu quiser adicionar mais "abas" só eu duplicar (<h3>Home</h3>
-        <a href="#"><i class="fa-solid fa-house"></i>Relatorios</a>) -->
+<div class="sidebar" id="sidebar">
+    <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Relatórios</a>
+    <a href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
+    <a class="sidebar-active" href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
+    <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid fa-user-plus"></i>Cadastro</a>
+    <a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+    <br>
+    <hr>
+</div>
 
-        </div><!-- sidebar-->
         <div class="content content-apiario">
             <div class="titulo-sessão">
                 <h2>Histórico de ocorrências</h2>
@@ -44,6 +37,7 @@
                         <option value="dataHora">Data</option>
                         <option value="descricaoAlerta">Apiário</option>
                     </select>
+
                     <select id="ordenar-historico2" name="ordenar-historico2">
                         <option value="DESC">Decrescente</option>
                         <option value="ASC">Crescente</option>
@@ -51,14 +45,12 @@
                 </div>
                 <br>
             </div>
-            <!--o i é nossa classe de elemento-->
-            <!-- Alerta Critico -->
-            <div id="historico_alertas" class="cards-apiarios">
-            </div>
+            <div id="historico_alertas" class="cards-apiarios"></div>
+        </div>
+    </section>
 
 
-        </div><!--content -->
-    </section> <!--main-->
+    <script src="../js/gestor.js"></script>
 
     <script>
 
