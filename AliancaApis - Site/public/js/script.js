@@ -23,7 +23,9 @@ async function entrar() {
             sessionStorage.NOME_USUARIO = usuario.nome;
             sessionStorage.EMAIL_USUARIO = usuario.email;
             sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.apiarios && usuario.apiarios[0] && usuario.apiarios[0].fk_empresa) || "";
-            sessionStorage.CLASSE = usuario.classe;         
+            sessionStorage.CLASSE = usuario.classe; 
+            sessionStorage.AQUARIOS = JSON.stringify(usuario.apiarios);        
+
             
             window.location.href = "./dashboard/dashboard.html";
             console.log(resposta)

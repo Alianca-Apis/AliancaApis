@@ -21,6 +21,9 @@ var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var apiariosRouter = require("./src/routes/apiarios");
 var empresasRouter = require("./src/routes/empresas");
+var dashboardRouter = require('./src/routes/dashboard');
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
+app.use('/leitura', dashboardRouter)
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
