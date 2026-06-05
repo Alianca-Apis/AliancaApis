@@ -11,11 +11,11 @@ async function entrar() {
             body: JSON.stringify({
                 emailServer: email,
                 senhaServer: senha
-    
+
             })
         });
         console.log("entrou fetch")
-        
+
         if (resposta.ok) {
             const usuario = await resposta.json();
             console.log(`usuario é ${usuario}`)
@@ -23,10 +23,10 @@ async function entrar() {
             sessionStorage.NOME_USUARIO = usuario.nome;
             sessionStorage.EMAIL_USUARIO = usuario.email;
             sessionStorage.EMPRESA_ID = usuario.empresaId || (usuario.apiarios && usuario.apiarios[0] && usuario.apiarios[0].fk_empresa) || "";
-            sessionStorage.CLASSE = usuario.classe; 
-            sessionStorage.AQUARIOS = JSON.stringify(usuario.apiarios);        
+            sessionStorage.CLASSE = usuario.classe;
+            sessionStorage.AQUARIOS = JSON.stringify(usuario.apiarios);
 
-            
+
             window.location.href = "./dashboard/dashboard.html";
             console.log(resposta)
         } else {
@@ -41,43 +41,34 @@ async function entrar() {
 async function cadastrar() {
     let nome = ipt_nome.value.trim();
     let sobrenome = ipt_sobrenome.value.trim();
-    let dataNasc = ipt_dataNasc.value;
-    let cpf = ipt_cpf.value.trim();
     let email = ipt_email.value.trim();
     let senha = ipt_senha.value;
     let confirmacaoSenha = ipt_confirmacaoSenha.value;
-    let confirmacaoCode = ipt_confirmacaoCodigo.value.trim();
+    let tipo = document.getElementById("tipo").value;
 
     let condicoesErro = [
-        nome == "" || cpf == "" || email == "" || senha == "" || confirmacaoSenha == "",
-        nome == "" || nome.length <= 3,
-        dataNasc == "",
-        cpf.length != 11,
+        nome == "" || email == "" || senha == "" || confirmacaoSenha == "",
+        nome.length <= 3,
         !email.includes("@"),
         senha.length < 6,
         confirmacaoSenha != senha,
-        confirmacaoCode == "" || isNaN(Number(confirmacaoCode))
     ];
 
     let mensagensErro = [
         "Todos campos são obrigatórios",
         "Nome inválido",
-        "Preencha a data de nascimento",
-        "CPF deve ter 11 dígitos",
         "E-mail deve conter @",
         "Senha muito curta (mínimo 6)",
         "Senhas não coincidem",
-        "Insira o Código de ativação válido"
     ];
 
     for (let i = 0; i < condicoesErro.length; i++) {
-
         if (condicoesErro[i]) {
             div_erro.innerHTML = mensagensErro[i];
-
             return false;
         }
     }
+
     try {
         const resposta = await fetch("http://localhost:3333/usuarios/cadastrar", {
             method: "POST",
@@ -86,12 +77,17 @@ async function cadastrar() {
                 nomeServer: `${nome} ${sobrenome}`.trim(),
                 emailServer: email,
                 senhaServer: senha,
-                fkEmpresaServer: Number(confirmacaoCode)
+                fkEmpresaServer: Number(sessionStorage.getItem("EMPRESA_ID")),
+                tipoServer: tipo
             })
         });
 
         if (resposta.ok) {
-            window.location.href = "login.html";
+            div_erro.style.color = "green";
+            div_erro.innerHTML = "Cadastro realizado com sucesso!";
+            setTimeout(() => {
+                window.location.href = "./dashboard/dashboard.html";
+            }, 2000);
         } else {
             const erro = await resposta.text();
             div_erro.innerHTML = erro;
