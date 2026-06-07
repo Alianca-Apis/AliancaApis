@@ -2,8 +2,6 @@ var express = require("express");
 var router = express.Router();
 var dashboardRouter = require("./dashboard");
 
-router.use("/leitura", dashboardRouter);
-
 router.get("/", function (req, res) {
     res.render("index");
 });

@@ -18,8 +18,6 @@
             <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Relatórios</a>
             <a class="sidebar-active" href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
-            <a href="/public/cadastro.html" style="display: none;"><i class="fa-solid fa-user-plus"></i>Cadastro</a>
-            <a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
             <hr>
         </div>
 
@@ -29,57 +27,13 @@
                 <hr>
                 <br>
             </div>
-            <!-- Sinalizadores de Temperatura -->
-            <!--o i é nossa classe de elemento-->
-            <!-- Alerta Critico -->
             <div id="container_cards_apiarios" class="cards-apiarios">
-                <!--<div class="box-info apiario">
-                    <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
-                        class="card-unidade apiario">
-                        <div class="info-text">
-                            <h3>Apiário 1</h3>
-                            <p>Temperatura atual: 36°C</p>
-                            <p>Temperatura média: 35.8°C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(216, 13, 13, 0.459); border-color: red; color: #7A1A1A;"
-                        class="card-unidade apiario">
-                        <div class="info-text">
-                            <h3>Apiário 2</h3>
-                            <p>Temperatura atual: 29.4°C</p>
-                            <p>Temperatura média: 33.5°C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(255, 238, 0, 0.301); border-color: yellow; color: #5A4A00"
-                        class="card-unidade apiario">
-                        <div class="info-text">
-                            <h3>Apiário 3</h3>
-                            <p>Temperatura atual: 34°C</p>
-                            <p>Temperatura média: 35.1°C</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-info apiario">
-                    <div style="background-color: rgba(20, 252, 32, 0.658); border-color: green; color: #1A4d1A;"
-                        class="card-unidade apiario">
-                        <div class="info-text">
-                            <h3>Apiário 4</h3>
-                            <p>Temperatura atual: 35.8°C</p>
-                            <p>Temperatura média: 35.7°C</p>
-                        </div>
-                    </div>
-                </div>-->
             </div>
+        </div>
+    </section>
 
-        </div><!--content -->
-    </section> <!--main-->
 
-
-<script src="../js/gestor.js"></script>
+    <script src="../js/gestor.js"></script>
 
     <script>
         const card = document.getElementById("container_cards_apiarios");
@@ -158,9 +112,24 @@
             }
         }
 
-        carregarApiarios();
-    </script>
+        async function atualizarTemperaturas() {
+            const empresaId = sessionStorage.EMPRESA_ID;
+            if (!empresaId) return;
 
+            try {
+                const resposta = await fetch(`/apiarios/${empresaId}`);
+                if (!resposta.ok) return;
+
+                const lista = await resposta.json();
+                card.innerHTML = lista.map(criarCard).join("");
+            } catch (erro) {
+                console.error("Falha ao atualizar temperaturas:", erro);
+            }
+        }
+
+        carregarApiarios();
+        setInterval(atualizarTemperaturas, 500);
+    </script>
 </body>
 
 </html>

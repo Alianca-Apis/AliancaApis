@@ -16,6 +16,23 @@ function buscarLeitura(req, res) {
   });
 }
 
-module.exports = {
-  buscarLeitura
+function buscarKpis(req, res) {
+    const empresaId = req.query.empresaId;
+    if (!empresaId) return res.status(400).json({ erro: "empresaId obrigatório" });
+
+    dashboardModel.buscarKpis(empresaId).then((resultado) => {
+        res.status(200).json({
+            critico: resultado[0].critico || 0,
+            alerta:  resultado[0].alerta  || 0,
+            ideal:   resultado[0].ideal   || 0
+        });
+    }).catch((erro) => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+module.exports = { 
+  buscarLeitura, 
+  buscarKpis 
 };

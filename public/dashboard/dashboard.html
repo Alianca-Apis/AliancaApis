@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard Aliança Apis</title>
+    <title>Aliança Apis | Dashboard</title>
     <link rel="stylesheet" href="../css/styleDashboard.css">
     <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,7 +17,6 @@
             <a class="sidebar-active" href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
             <a href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
-            <a href="../login.html" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
             <hr>
         </div>
 
@@ -32,19 +31,19 @@
                 <div class="card-unidade vermelho">
                     <div>
                         <h3>Apiários Críticos</h3>
-                        <p id="qtd-critico">Quantidade: -</p>
+                        <p id="qtd_critico">Quantidade: -</p>
                     </div>
                 </div>
                 <div class="card-unidade amarelo">
                     <div>
                         <h3>Apiários em Observação</h3>
-                        <p id="qtd-alerta">Quantidade: -</p>
+                        <p id="qtd_alerta">Quantidade: -</p>
                     </div>
                 </div>
                 <div class="card-unidade verde">
                     <div>
                         <h3>Apiários sob Controle</h3>
-                        <p id="qtd-ideal">Quantidade: -</p>
+                        <p id="qtd_ideal">Quantidade: -</p>
                     </div>
                 </div>
             </div>
@@ -79,12 +78,12 @@
 
         async function carregarKpis() {
             try {
-                const res = await fetch(`/leitura/kpis?empresaId=${empresaId}`, { cache: 'no-store' });
+                const res = await fetch(`/leitura/kpis?empresaId=${empresaId}`);
                 if (!res.ok) return;
                 const dados = await res.json();
-                document.getElementById("qtd-critico").textContent = `Quantidade: ${dados.critico ?? 0}`;
-                document.getElementById("qtd-alerta").textContent  = `Quantidade: ${dados.alerta  ?? 0}`;
-                document.getElementById("qtd-ideal").textContent   = `Quantidade: ${dados.ideal   ?? 0}`;
+                qtd_critico.innerHTML = `Quantidade: ${dados.critico}`;
+                qtd_alerta.innerHTML = `Quantidade: ${dados.alerta}`;
+                qtd_ideal.innerHTML = `Quantidade: ${dados.ideal}`;
             } catch (e) {
                 console.error("Erro ao carregar KPIs:", e);
             }
