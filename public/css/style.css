@@ -20,12 +20,6 @@
     text-decoration: none;
 }
 
-.container {
-    display: flex;
-    width: 80%;
-    margin: auto;
-}
-
 .bodyIndex {
     background-color: #f9f6ed;
     color: #2d0a31;
@@ -273,20 +267,6 @@ button {
     height: 100px;
 }
 
-.simuladorContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    /* Ele flutua sobre a página */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    /* Fica atrás do header se o header tiver z-index maior */
-}
-
 .cardSimulador {
     background-color: #E5E3D6;
     border-radius: 16px;
@@ -428,21 +408,17 @@ footer {
     font-weight: bold;
 }
 
-/* Tela de login e Cadastro */
-
 .loginContainer {
 
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    /* Ele flutua sobre a página */
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     z-index: 1;
-    /* Fica atrás do header se o header tiver z-index maior */
 }
 
 .cardLogin {
@@ -529,11 +505,6 @@ footer {
 
 }
 
-
-
-
-
-/* Cards de informações */
 .quadroTxtContainer {
     background-color: #F5F3E7;
     padding: 80px 5%;
@@ -564,7 +535,6 @@ footer {
     width: 100%;
 }
 
-/* O Card individual */
 .cardTexto div {
     background-color: #E5E3D6;
     border-radius: 24px;

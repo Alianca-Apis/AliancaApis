@@ -78,7 +78,6 @@ a {
     color: #2D0A31;
 }
 
-/*icons-header*/
 .logo {
     height: 50px;
     display: flex;
@@ -91,8 +90,6 @@ a {
     width: auto;
 }
 
-
-/*main*/
 .main {
     display: flex;
     flex-wrap: nowrap;
@@ -100,7 +97,6 @@ a {
     align-items: flex-start;
 }
 
-/*todos os sidebar*/
 .sidebar {
     width: 20%;
     min-width: 220px;
@@ -154,27 +150,12 @@ a {
     font-weight: bold;
 }
 
-/*.sidebar a:hover .sidebar a > svg {
-    color: rgb(57, 0, 83);
-}*/
-
-
-
-
-
-
 .content {
     flex: 1;
     margin-left: 20%;
     width: auto;
     padding: 20px 40px;
 }
-
-
-
-
-
-
 
 .logo {
     margin-top: 15px;
@@ -207,13 +188,6 @@ a {
 .titulo-sessão i {
     color: #9a6e2a;
 }
-
-/* se eu não gostar do meu hr e quise mudar no index , vou substiruir o hr por div class= "separador" div.
-e no css eu coloco: 
-.separador{
-width:100%;
-height: 1px;
-background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa quase invisivel}*/
 
 .box-info {
     width: 100%;
@@ -253,55 +227,6 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 .card-unidade svg {
     font-size: 28px;
     display: flex;
-
-}
-
-
-.feed {
-    margin: 10px 0;
-    width: 100%;
-    padding: 50px;
-    background-color: white;
-    border-radius: 10px;
-}
-
-.feed-single {
-    display: flex;
-    justify-content: space-between;
-}
-
-.feed-text span {
-    color: black;
-}
-
-/* se que quiser mudar meu icone de cor
-    width: 40px;
-    height: 40px;
-    border-radius: 20px ;
-    background-color: #73b4ff;
-    color: black;
-}*/
-
-.feed-text svg {
-    font-size: 18px;
-    color: #73b4ff;
-    position: absolute;
-    left: 50%;
-
-}
-
-.feed-text .circle-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: cyan;
-    position: relative;
-
-}
-
-.feed-number {
-    color: #444;
-
 }
 
 .graficos {
@@ -322,29 +247,10 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     color: black;
 }
 
-.caixaa {
-    flex: 1 1 320px;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #E5E3D6;
-    border-radius: 20px;
-    font-family: 'Manrope', sans-serif;
-    color: black;
-    font-size: 20px;
-}
-
-.caixa canvas,
-.caixaa canvas {
+.caixa canvas, canvas {
     width: 100%;
     height: auto;
     display: block;
-}
-
-#meugrafico {
-    color: black;
 }
 
 .content-apiario {
@@ -369,13 +275,22 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     padding: 0 12px;
     border: none;
     border-radius: 6px;
-    background-color: #f9f6ed;
+    background-color: var(--card-white);
     color: #2d0a31;
     cursor: pointer;
     font-weight: 500;
     font-size: 15px;
 }
 
-.select-apiario:focus {
+select {
+    border: 2px solid var(--bg-white);
+    border-radius: 6px;
+    background-color: var(--card-white);
+    color: #2d0a31;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+select:focus {
     border: 2px solid #865D1D;
 }
