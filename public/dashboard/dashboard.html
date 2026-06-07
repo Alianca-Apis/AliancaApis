@@ -13,8 +13,8 @@
 <body style="margin-top: 0px; overflow-y: hidden;">
     <section class="main">
         <div class="sidebar" id="sidebar">
-            <a href="../index.html"><i class="fa-solid fa-house"></i>Home</a>
-            <a class="sidebar-active" href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Relatórios</a>
+            <a href="../index.html"><img src="../assets/imgs/logo-main.png"></a>
+            <a class="sidebar-active" href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
             <a href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
             <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
             <a href="../login.html" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
@@ -28,42 +28,38 @@
                 <br>
             </div>
 
-            <!-- KPIs -->
-            <div class="box-info">
-                <div style="background-color: rgba(216, 13, 13, 0.459); border: none; color: #7A1A1A;" class="card-unidade">
-                    <div class="info-text">
-                        <h3>Apiários com problema</h3>
+            <div class="box-info" style="margin-top: 16px;">
+                <div class="card-unidade vermelho">
+                    <div>
+                        <h3>Apiários Críticos</h3>
                         <p id="qtd-critico">Quantidade: -</p>
                     </div>
                 </div>
-                <div style="background-color: rgba(255, 238, 0, 0.301); border: none; color: #5A4A00" class="card-unidade">
-                    <div class="info-text">
-                        <h3>Apiários que precisam de atenção</h3>
+                <div class="card-unidade amarelo">
+                    <div>
+                        <h3>Apiários em Observação</h3>
                         <p id="qtd-alerta">Quantidade: -</p>
                     </div>
                 </div>
-                <div style="background-color: rgba(20, 252, 32, 0.658); border: none; color: #1A4d1A;" class="card-unidade">
-                    <div class="info-text">
-                        <h3>Faixa de temperatura Ideal</h3>
+                <div class="card-unidade verde">
+                    <div>
+                        <h3>Apiários sob Controle</h3>
                         <p id="qtd-ideal">Quantidade: -</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Select de apiário -->
             <div style="margin: 16px 0; display:flex; align-items:center; gap:10px;">
                 <label for="select-apiario" style="font-weight:500;">Selecionar Apiário:</label>
                 <select class="select-apiario" id="select-apiario" onchange="exibirAquario(this.value)"></select>
             </div>
 
-            <!-- Gráficos individuais (gerados dinamicamente dentro do card) -->
             <div class="graficos">
                 <div class="caixa">
                     <center><h2>Temperatura Apiário</h2></center>
                     <div id="graficos"></div>
                 </div>
             </div>
-
         </div>
     </section>
 

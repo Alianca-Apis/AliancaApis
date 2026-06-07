@@ -1,3 +1,16 @@
+:root {
+    --bg-white: #e5e3d6;
+    --card-white: #f9f6ed;
+    --text-purple: #2d0a31;
+    --brown: #865d1d;
+    --green: #2ecc71;
+    --yellow: #F9CF30;
+    --red: #EE3D2D;
+    --bg-green: rgba(20, 252, 32, 0.658);
+    --bg-yellow: rgba(255, 238, 0, 0.301);
+    --bg-red: rgba(216, 13, 13, 0.459);
+}
+
 @font-face {
     font-family: 'Manrope';
     src: url('./assets/fonts/Manrope/Manrope-VariableFont.ttf') format('truetype');
@@ -15,7 +28,7 @@
 }
 
 body {
-    background-color: #EBE5E5;
+    background-color: var(--bg-white);
     color: #2d0a31;
     font-family: 'Manrope', sans-serif;
     line-height: 1.6;
@@ -91,8 +104,14 @@ a {
 .sidebar {
     width: 20%;
     min-width: 220px;
-    min-height: calc(100vh - 70px);
-    background-color: rgb(235, 229, 229);
+    height: 100vh;
+    position: fixed;
+    background-color: var(--bg-white);
+    border-right: 1px solid gray;
+}
+
+.sidebar img {
+    width: 50px; 
 }
 
 .sidebar h3 {
@@ -146,6 +165,7 @@ a {
 
 .content {
     flex: 1;
+    margin-left: 20%;
     width: auto;
     padding: 20px 40px;
 }
@@ -171,7 +191,7 @@ a {
 
 
 .titulo-sessão {
-    background-color: #f5f3e7;
+    background-color: var(--card-white);
     padding: 10px;
     border-radius: 10px;
 }
@@ -197,41 +217,37 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 
 .box-info {
     width: 100%;
-    margin: 20px 0;
     display: flex;
     justify-content: space-between;
     gap: 10px;
-
 }
 
 .card-unidade {
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    color: white;
     padding: 20px;
     margin: 0;
     align-items: center;
     border: 2px solid;
     width: calc(33.333% - 7px);
+    background-color: var(--card-white);
+    border: none;
 }
 
 .verde {
-    background-color: rgba(20, 252, 32, 0.658);
-    border-color: green;
-    color: #1A4d1A;
-}
-
-.amarelo {
-    background-color: rgba(255, 238, 0, 0.301);
-    border-color: yellow;
-    color: #5A4A00;
+    background-color: var(--bg-green);
+    border-top: 5px solid var(--green);
 }
 
 .vermelho {
-    background-color: rgba(216, 13, 13, 0.459);
-    border-color: red;
-    color: #7A1A1A;
+    background-color: var(--bg-red);
+    border-top: 5px solid var(--red);
+}
+
+.amarelo {
+    background-color: var(--bg-yellow);
+    border-top: 5px solid var(--yellow);
 }
 
 .card-unidade svg {
@@ -295,18 +311,15 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
 }
 
 .caixa {
-
     flex: 1 1 320px;
     width: auto;
     max-width: 100%;
     height: auto;
-    margin: 20px 0;
     padding: 20px;
-    background-color: #E5E3D6;
+    background-color: var(--card-white);
     border-radius: 20px;
     font-family: 'Manrope', sans-serif;
     color: black;
-
 }
 
 .caixaa {
@@ -343,12 +356,26 @@ background-color: e a cor que eu quero , uma boa é a rgb(245,245,245) deixa qua
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
-    background-color: #d6d5d2;
+    padding: 20px;
 }
 
 .apiario {
     width: 300px;
-    margin: 10px 0 10px 0;
     display: block;
+}
 
+.select-apiario {
+    height: 38px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #f9f6ed;
+    color: #2d0a31;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.select-apiario:focus {
+    border: 2px solid #865D1D;
 }
