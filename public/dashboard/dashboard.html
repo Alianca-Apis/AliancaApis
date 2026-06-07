@@ -67,16 +67,6 @@
     <script>
         const empresaId = sessionStorage.getItem("EMPRESA_ID");
 
-        if (!empresaId) {
-            window.location.href = "../login.html";
-        }
-
-        document.getElementById("btn-sair").addEventListener("click", function (e) {
-            e.preventDefault();
-            sessionStorage.clear();
-            window.location.href = "../login.html";
-        });
-
         async function carregarKpis() {
             try {
                 const res = await fetch(`/leitura/kpis?empresaId=${empresaId}`);

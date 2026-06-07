@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aliança Apis | N3</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleN3.css">
     <link rel="icon" href="../assets/imgs/logo_bn.png">
     <style>
         body {
@@ -24,15 +25,17 @@
         <div class="cardLogin" style="max-width: 440px;">
             <div class="input-row" style="justify-content: space-between;">
                 <h2>Acesso N3</h2>
-                <span>SUPORTE</span>
+                <span class="badge-n3">SUPORTE</span>
             </div>
-
             <div class="detalheLinhaLogin"></div>
 
             <p style="font-size: 13px; color: #555;">Selecione a empresa do cliente para acessar o dashboard.</p>
 
-            <div id="lista_empresas"></div>
-            <button class="btn_principalMarrom">Acessar Dashboard</button>
+            <div class="lista-empresas" id="lista_empresas">
+                <p style="color: #888; font-size: 13px;">Carregando empresas...</p>
+            </div>
+
+            <button class="btn_principalMarrom" onclick="acessarEmpresa()">Acessar Dashboard</button>
 
             <div id="div_erro"></div>
         </div>
@@ -44,5 +47,91 @@
         </div>
         <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
     </div>
+
+    <script>
+        let empresaSelecionada = null;
+            
+        carregarEmpresas();
+            
+        async function carregarEmpresas() {
+            const empresas = await buscarEmpresas();
+            if (!empresas) return;
+        
+            if (empresas.length === 0) {
+                lista_empresas.innerHTML = "<p>Nenhuma empresa cadastrada.</p>";
+                return;
+            }
+        
+            lista_empresas.innerHTML = empresas.map(e => `
+                <div class="empresa-item" id="emp_${e.idEmpresa}" onclick="selecionarEmpresa(${e.idEmpresa}, '${e.nomeFantasia}', this)">
+                    <span>${e.nomeFantasia}</span>
+                    <small>${e.razaoSocial}</small>
+                </div>
+            `).join("");
+        }
+        
+        async function buscarEmpresas() {
+            try {
+                const resposta = await fetch("/empresas");
+                if (!resposta.ok) throw new Error();
+                return await resposta.json();
+            } catch {
+                document.getElementById("lista_empresas").innerHTML = "<p>Erro ao carregar empresas.</p>";
+                return null;
+            }
+        }
+        
+        function selecionarEmpresa(id, nome, el) {
+            document.querySelectorAll(".empresa-item").forEach(item => item.classList.remove("selecionada"));
+            el.classList.add("selecionada");
+            empresaSelecionada = { id, nome };
+            limparErro();
+        }
+        
+        async function acessarEmpresa() {
+            if (!empresaSelecionada) {
+                mostrarErro("Selecione uma empresa.");
+                return;
+            }
+        
+            const apiarios = await buscarApiarios(empresaSelecionada.id);
+            if (apiarios === null) return;
+        
+            salvarSessao(empresaSelecionada, apiarios);
+            window.location.href = "./dashboard/dashboard.html";
+        }
+        
+        async function buscarApiarios(idEmpresa) {
+            try {
+                const resposta = await fetch(`/apiarios/${idEmpresa}`);
+                if (resposta.status === 204) return [];
+                if (!resposta.ok) throw new Error();
+                return await resposta.json();
+            } catch {
+                mostrarErro("Erro ao carregar apiários da empresa.");
+                return null;
+            }
+        }
+        
+        function salvarSessao(empresa, apiarios) {
+            sessionStorage.setItem("EMPRESA_ID",    empresa.id);
+            sessionStorage.setItem("NOME_USUARIO",  "N3 - " + empresa.nome);
+            sessionStorage.setItem("EMAIL_USUARIO", "n3@aliancaapis.com");
+            sessionStorage.setItem("CLASSE",        "n3");
+            sessionStorage.setItem("AQUARIOS",      JSON.stringify(
+                apiarios.map(a => ({ idApiario: a.idApiario, descricao: a.descricao }))
+            ));
+        }
+        
+        function mostrarErro(msg) {
+            document.getElementById("div_erro").innerHTML = msg;
+        }
+        
+        function limparErro() {
+            document.getElementById("div_erro").innerHTML = "";
+        }
+    </script>
+
 </body>
+
 </html>
