@@ -26,8 +26,11 @@ async function entrar() {
             sessionStorage.CLASSE = usuario.classe;
             sessionStorage.AQUARIOS = JSON.stringify(usuario.apiarios);
 
-
-            window.location.href = "./dashboard/dashboard.html";
+            if (usuario.classe === "n3") {
+                window.location.href = "./n3.html";
+            } else {
+                window.location.href = "./dashboard/dashboard.html";
+            }
             console.log(resposta)
         } else {
             const erro = await resposta.text();

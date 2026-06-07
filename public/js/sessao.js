@@ -23,7 +23,7 @@ if (classeUsuario == "gestor") {
         <a href="../cadastro.html"><i class="fa-solid fa-user-plus"></i>Cadastro</a>
         <a href="https://aliancaapis.atlassian.net/servicedesk/customer/portal/1"><i class="fa-solid fa-headset"></i>Central de Atendimento</a>
         <hr>   
-        <a onclick="limparSessao()" href="" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+        <a onclick="limparSessao()" href="../login.html" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
         `
 } else if (classeUsuario == "n3") {
     sidebar.innerHTML += `
@@ -36,7 +36,7 @@ if (classeUsuario == "gestor") {
         `
 } else {
     sidebar.innerHTML += `
-        <a onclick="limparSessao()" href="" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+        <a onclick="limparSessao()" href="../login.html" id="btn-sair"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
         `
 }
 
