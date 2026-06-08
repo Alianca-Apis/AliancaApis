@@ -132,8 +132,8 @@ INSERT INTO apiario (identificacaoApiario, fkEmpresa)
 VALUES 
 ('Apiario no Setor Sul', 1),
 ('Apiario no Setor Oeste', 1),
-('Apiario no Setor Norte', 2),
-('Apiario no Alley', 3);
+('Apiario no Setor Norte', 1),
+('Apiario no Setor Sul', 1);
 select * from apiario;
 
 -- INSERT SENSOR (Corrigido fkApiario conforme DDL)

@@ -79,6 +79,16 @@ button {
     color: #e5e3d6;
 }
 
+.btn_principalMarrom i {
+    font-size: 20px !important;
+    color: #FAF8EB !important;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn_principalMarrom:hover i {
+    color: #e5e3d6 !important;
+}
+
 .btn_secundarioCinza {
     background: #E5E3D6;
     color: #220029;
@@ -193,7 +203,7 @@ button {
     align-items: center;
     padding: 25px 3%;
     gap: 25px;
-    background-image: url(./assets/imgs/bg_halftone.png);
+    background-image: url(../assets/imgs/bg_halftone.png);
     background-size: contain;
 }
 
