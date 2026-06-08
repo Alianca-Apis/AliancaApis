@@ -30,7 +30,7 @@ if (classeUsuario == "gestor") {
         <a href="../cadastro.html"><i class="fa-solid fa-user-plus"></i>Cadastro</a>
         <a href="https://aliancaapis.atlassian.net/servicedesk/customer/portal/1"><i class="fa-solid fa-headset"></i>Central de Atendimento</a>
         <hr>   
-        <a href="http://localhost:3000" id=""><i class="fa-solid fa-right fa-microchip"></i>Bob IA</a>
+        <a href="bobia.html" id=""><i class="fa-solid fa-right fa-microchip"></i>Bob IA</a>
         <hr>   
         <a href="../n3.html" id=""><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
         `

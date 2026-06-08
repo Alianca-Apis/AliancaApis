@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliança Apis | Bob IA</title>
+    <link rel="stylesheet" href="../css/styleDashboard.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body style="margin-top: 0px; overflow-y: hidden;">
+    <section class="main">
+        <div class="sidebar" id="sidebar">
+            <a href="../index.html"><img src="../assets/imgs/logo-main.png"></a>
+            <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a>
+            <a href="apiarios.html"><i class="fa-solid fa-jar"></i>Apiários</a>
+            <a href="historico.html"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</a>
+            <hr>
+        </div>
+
+        <div class="content">
+            <div class="titulo-sessão">
+                <h2>BobIA</h2>
+                <hr>
+                <br>
+            </div>
+
+            <div class="input-row">
+                    <textarea style="margin-top: 16px;" id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
+                    <button style="margin-top: 16px;" class="btn_principalMarrom" onclick="gerarResposta()">Gerar Resposta</button>
+            </div>
+            
+            <h2 style="font-size: 25px; margin-top: 16px;">Resposta da IA:</h2>
+            <div class="titulo-sessão" id="resposta"></div>
+        </div>
+    </section>
+
+    <script src="../js/sessao.js"></script>
+
+    <script>
+
+        async function gerarResposta() {
+            const pergunta = document.getElementById('pergunta').value.trim();
+            const respostaDiv = document.getElementById('resposta');
+
+            if (!pergunta) {
+                respostaDiv.style.display = 'block';
+                respostaDiv.innerText = 'Digite uma pergunta antes de enviar.';
+                return;
+            }
+
+            respostaDiv.style.display = 'block';
+            respostaDiv.innerText = 'Aguarde...';
+
+            try {
+                const response = await fetch('http://localhost:3000/perguntar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pergunta })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    respostaDiv.innerText = data.erro || 'Erro ao obter resposta. Tenta novamente.';
+                    return;
+                }
+
+                respostaDiv.innerText = data.resultado;
+
+            } catch (err) {
+                respostaDiv.innerText = 'Erro de conexão. Verifique sua internet e tente novamente.';
+            }
+        }
+    </script>
+</body>
+</html>

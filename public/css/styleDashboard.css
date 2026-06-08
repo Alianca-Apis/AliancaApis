@@ -294,3 +294,10 @@ select {
 select:focus {
     border: 2px solid #865D1D;
 }
+
+textarea[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 400px;
+}
