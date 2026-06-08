@@ -4,47 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/faeContatos.css">
-    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
     <title>Aliança Apis | FAQ</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/styleFaq.css">
+    <link rel="icon" href="./assets/imgs/logo_bn.png">
+    <script src="./js/script.js"></script>
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
-    <!-- HEADER -->
-
     <header class="navbar">
-
         <div class="logo">
             <img src="./assets/imgs/logo-main.png" alt="Logo Aliança Apis">
         </div>
 
         <nav>
             <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="index.html">Sobre Nós</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="faq.html" class="active">FAQ</a></li>
             </ul>
         </nav>
 
-        <button class="botão-principal"
-            onclick="window.location.href = 'login.html'">
-            Acesse agora
-        </button>
-
+        <button class="btn_principalMarrom" onclick="window.location.href = 'login.html'">Acesse agora</button>
     </header>
 
-    <!-- CONTEÚDO -->
-
     <main>
-
         <section class="faq">
-
-            <!-- FAQ -->
-
             <div class="faqSesão">
-
-                <span class="detalhe">DÚVIDAS FREQUENTES</span>
+                <span class="detalhe" class="detalhe" style="background-color:#865D1D; color: #ebe6d8;">DÚVIDAS FREQUENTES</span>
                 <div class="detalheLinhaLogin"></div>
                 <div class="faqItem">
 
@@ -81,77 +68,41 @@
                     </p>
 
                 </div>
-
             </div>
 
-            <!-- CONTATOS -->
-
             <div class="contatoSection">
-                <span class="detalhe">ENTRE EM CONTATO</span>
+                <span class="detalhe" style="background-color:#865D1D; color: #ebe6d8;">ENTRE EM CONTATO</span>
                 <div class="detalheLinhaLogin"></div>
-                <div class="ContItem">
+                <div class="ContItem" style="display: flex; flex-direction: column; justify-content: space-evenly; min-height: 400px;">
                     <p>
                     Fique a vontade para entrar em contato conosco.
                     Estamos sempres abertos para esclarecer qualquer tipo de dúvidas.
                     </p> 
-
-                    <p><i class="fa-solid fa-phone"></i></p>
                     <br>
+                    <br>
+                    <br>
+                    <br>
+                    <p><i class="fa-solid fa-phone"></i></p>
                     <p>11 98173-9702</p>
                     <p><i class="fa-solid fa-envelope"></i></p>
-                    <br>
                     <p>AliançaApis2026@gmail.com</p>
-                    
-                    <a class="botão" href="https://aliancaapis.atlassian.net/servicedesk/customer/portal/1">HELP DESK</a>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <button class="btn_principalMarrom" href="https://aliancaapis.atlassian.net/servicedesk/customer/portal/1" style="width: 100%;">Fale Conosco</button>
                 </div>
             </div>
-
         </section>
-
     </main>
 
-    <!-- FOOTER -->
-
-    <footer class="principal">
-
-        <div>
-            <img class="logo-footer"
-                src="./assets/imgs/logo-footer.png"
-                alt="Logo Aliança Apis">
+    <div class="copyrightFooterInv" style="background-color: #865D1D; padding: 20px; background-image: url(./assets/imgs/colmeia.png);">
+        <div class="logoFooter">
+            <img src="./assets/imgs/logo_bn.png">
         </div>
-
-        <div class="nav-footer">
-
-            <ul>
-                <li>EMPRESA</li>
-                <li>Sobre</li>
-                <li>Centro de Marca</li>
-                <li>Blog</li>
-            </ul>
-
-            <ul>
-                <li>LEGAL</li>
-                <li>Política de privacidade</li>
-                <li>Licenciamento</li>
-                <li>Termos e Condições</li>
-            </ul>
-
-            <ul>
-                <li>ENCONTRE-NOS</li>
-                <li>Instagram</li>
-                <li>Whatsapp</li>
-                <li>Facebook</li>
-                <li>Linkedin</li>
-            </ul>
-
-        </div>
-
-    </footer>
-
-    <div class="copyright">
         <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
     </div>
-
 </body>
 
 </html>

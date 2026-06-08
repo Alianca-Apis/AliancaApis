@@ -23,65 +23,6 @@ body {
     padding-top: 70px;
 }
 
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    padding: 0 5%;
-    background-color: #f9f6edc5;
-    background-image: url(./assets/imgs/colmeia.png);
-    background-size: contain;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #2d0a310e;
-    z-index: 1000;
-}
-
-.logo {
-    height: 50px;
-}
-
-.logo img {
-    height: 100%;
-}
-
-.navbar nav ul {
-    display: flex;
-    list-style: none;
-    gap: 60px;
-}
-
-.navbar nav a {
-    color: #2d0a31;
-    font-size: 20px;
-}
-
-.navbar nav a.active {
-    color: #865D1D;
-    border-bottom: 2px solid #865D1D;
-    padding-bottom: 5px;
-}
-
-
-
-.botão-principal {
-    background-color: #865D1D;
-    color: #FAF8EB;
-    height: 50px;
-    padding: 0 25px;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-
-
 .faq {
     display: flex;
     gap: 30px;
@@ -164,26 +105,6 @@ body {
     border-radius: 50px    ;
 }
 
-.botão{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    padding: 10px 25px;
-    font-size: 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border-radius: 100px;
-    border: 2px solid#865D1D;
-    border-radius: 5px;
-    background: #b48b4c;
-    color: white;
-}
-
-
-
-
-
 footer {
     display: flex;
     justify-content: space-around;
@@ -193,32 +114,4 @@ footer {
 
 .logo-footer {
     height: 250px;
-}
-
-.nav-footer {
-    display: flex;
-    gap: 150px;
-    color: #FAF8EB;
-}
-
-.nav-footer ul {
-    list-style: none;
-}
-
-.nav-footer li {
-    margin: 15px 0;
-}
-
-.nav-footer li:first-child {
-    font-weight: bold;
-}
-
-
-.copyright {
-    background-color: #865D1D;
-    display: flex;
-    justify-content: center;
-    color: #FAF8EB;
-    font-size: 10px;
-    padding-bottom: 15px;
 }

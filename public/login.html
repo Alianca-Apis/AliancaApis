@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="./assets/imgs/logo_bn.png">
     <script src="./js/script.js"></script>
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
 </head>
 
 <style>
@@ -22,24 +23,13 @@
     }
 </style>
 
-<body class="bodyCadastro" onload="sessionStorage.clear();">
-    <header class="navbar">
-        <div class="logo">
-            <img src="./assets/imgs/logo-main.png" alt="Aliança Apis Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="index.html">Sobre Nós</a></li>
-                <li><a href="faq.html" class="active">FAQ</a></li>
-            </ul>
-        </nav>
-        <button class="btn_principalMarrom">Acesse agora</button>
-    </header>
-
+<body class="bodyCadastro" style="padding-top: 0px;" onload="sessionStorage.clear();">
     <div class="loginContainer">
         <div class="cardLogin">
-            <h2>Identificação</h2>
+            <div class="input-row" style="justify-content: space-between;">
+                <h2>Identificação</h2>
+                <a href="index.html" class="voltar-dashboard">Voltar<i class="fa-solid fa-arrow-right"></i></a>
+            </div>
             <div class="detalheLinhaLogin"></div>
 
             <div class="input-group">
@@ -64,10 +54,5 @@
 
         <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
     </div>
-
 </body>
-
 </html>
-<script>
-
-</script>

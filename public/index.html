@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="./assets/imgs/logo_bn.png">
     <script src="./js/script.js"></script>
+    <script src="https://kit.fontawesome.com/a6f961102e.js" crossorigin="anonymous"></script>
 </head>
-<!--HEADER-->
+
 <body class="bodyIndex">
     <header class="navbar">
         <div class="logo">
@@ -17,18 +18,17 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="active">Início</a></li>
-                <li><a href="index.html">Sobre Nós</a></li>
+                <li><a href="#s1_inicio" class="active">Home</a></li>
+                <li><a href="#s2_valores">Valores</a></li>
+                <li><a href="#s3_SobreNos">Sobre Nós</a></li>
+                <li><a href="#s4_simulador">Simulador</a></li>
                 <li><a href="faq.html">FAQ</a></li>
             </ul>
         </nav>
         <button class="btn_principalMarrom" onclick="window.location.href = 'login.html'">Acesse agora</button>
     </header>
 
-    <main>
-
-        <!-- FIRST LOOK -->
-
+    <main id="s1_inicio">
         <div class="principal">
             <div class="principal-content">
                 <span class="detalhe">SEJA BEM-VINDO A ALIANÇA APIS</span>
@@ -42,6 +42,7 @@
                         contato</button>
                 </div>
             </div>
+
             <div class="principal-images">
                 <div class="img-container sub-img">
                     <img src="./assets/imgs/imagem2-home.png" alt="Abelhas">
@@ -55,33 +56,30 @@
                         <small>TEMPERATURA IDEAL</small>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- CARDS DE INFORMAÇÃO -->
-
-        <div class="quadroTxtContainer">
-            <div>
-                <h2>Eficiência baseada em dados.</h2>
-            </div>
-
+        <div class="quadroTxtContainer" id="s2_valores">
+            <div><h2>Eficiência baseada em dados.</h2></div>
             <div class="detalheLinhazinha"></div>
 
             <div class="cardTexto">
                 <div>
+                    <i class="fa-solid fa-chart-line detalhe-icon"></i>
                     <h3>Maximizar a Produção</h3>
                     <p>Utilizamos algoritmos térmicos avançados para manter o ninho no ponto ideal de produtividade,
                         garantindo mel de qualidade superior.</p>
                 </div>
 
                 <div>
+                    <i class="fa-solid fa-triangle-exclamation detalhe-icon"></i>
                     <h3>Evitar Infortúnios</h3>
                     <p>Sistema de alerta precoce que identifica anomalias térmicas antes que afetem a saúde da colônia,
                         mitigando riscos de perda total.</p>
                 </div>
 
                 <div>
+                    <i class="fa-solid fa-microchip detalhe-icon"></i>
                     <h3>Tecnologia IoT</h3>
                     <p>Sensores de alta precisão integrados a uma plataforma em nuvem, permitindo o monitoramento em
                         tempo real de qualquer lugar do mundo.</p>
@@ -89,9 +87,7 @@
             </div>
         </div>
 
-        <!-- SOBRE NÓS -->
-
-        <div class="sobre">
+        <div class="sobre" id="s3_SobreNos">
             <div class="sobre-img">
                 <img src="./assets/imgs/imagem3-home.png" alt="Colmeia inteligente">
             </div>
@@ -103,18 +99,15 @@
                 <p>Ao transformar o ambiente em dados estratégicos, a Aliança Apis gera insights que permitem
                     identificar riscos, otimizar a saúde do enxame e elevar a produção de mel a um novo patamar de
                     excelência e sustentabilidade.</p>
-                <a href="#" class="link-more">Saiba mais &rarr;</a>
+                <a href="#" class="link-more"><i class="fa-solid fa-arrow-right"></i> Saiba mais</a>
             </div>
         </div>
 
-        <!-- SIMULADOR FINANCEIRO -->
-
-        <div class="cardSimulador">
+        <div class="cardSimulador" id="s4_simulador">
             <h2>Simulador Financeiro</h2>
             <div class="detalheLinhaLogin"></div>
 
             <div class="corpo-simulador">
-                
                 <div class="coluna-inputs">
                     <div class="input-group">
                         <span for="ipt_quantidade">Quantas colmeias artificiais você possui no seu apiário?</span>
@@ -141,46 +134,18 @@
                     </div>
                 </div>
 
-                <div id="divMsg" class="coluna-resultado">
-                </div>
+                <div id="divMsg" class="coluna-resultado"></div>
             </div>
-
-            <button onclick="calculo()" style="font-size: 16px;">CALCULAR</button>
+            <button class="btn_principalMarrom" onclick="calculo()" style="font-size: 16px; width: 100%;"><i class="fa-solid fa-calculator"></i> CALCULAR</button>
         </div>
-
     </main>
-<!--FOOTER-->
-    <footer class="principal">
-        <div>
-            <img class="logo-footer" src="./assets/imgs/logo-footer.png" alt="Aliança Apis Logo">
-        </div>
-        <div class="nav-footer">
-            <ul>
-                <li>EMPRESA</li>
-                <li>Sobre</li>
-                <li>Centro de Marca </li>
-                <li>Blog</li>
-            </ul>
-            <ul>
-                <li>LEGAL</li>
-                <li>Política de privacidade</li>
-                <li>Licenciamento</li>
-                <li>Termos e Condições</li>
-            </ul>
-            <ul>
-                <li>ENCONTRE-NOS</li>
-                <li>Instagram</li>
-                <li>Whatsapp</li>
-                <li>Facebook</li>
-                <li>Linkedin</li>
-            </ul>
-        </div>
 
-    </footer>
-    <div class="copyright">
-        <p>Copyright © 2010-2026 Aliança Apis All rights reserved.</p>
+    <div class="copyrightFooterInv" style="background-color: #865D1D; padding: 20px; background-image: url(./assets/imgs/colmeia.png);">
+        <div class="logoFooter">
+            <img src="./assets/imgs/logo_bn.png">
+        </div>
+        <p><i class="fa-regular fa-copyright"></i> 2010-2026 Aliança Apis All rights reserved.</p>
     </div>
-
 </body>
 
 </html>

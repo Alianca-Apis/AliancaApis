@@ -207,6 +207,12 @@ a {
     width: calc(33.333% - 7px);
     background-color: var(--card-white);
     border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-unidade:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.12);
 }
 
 .verde {

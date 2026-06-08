@@ -184,9 +184,9 @@
                     label: 'Temperatura (°C)',
                     data: [],
                     fill: false,
-                    borderColor: 'rgb(199, 52, 52)',
+                    borderColor: '#865D1D',
                     backgroundColor: '#865D1D',
-                    tension: 0.1
+                    tension: 0.4
                 }]
             };
 
@@ -206,9 +206,17 @@
             console.log('Dados:', dados.datasets);
             console.log('----------------------------------------------');
 
-            let myChart = new Chart(
+           let myChart = new Chart(
                 document.getElementById(`canvas${idApiario}`),
-                { type: 'line', data: dados, options: { maintainAspectRatio: false } }
+                { 
+                    type: 'line', 
+                    data: dados, 
+                    options: { 
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false }
+                    } 
+                }
             );
 
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar

@@ -142,32 +142,25 @@ function calculo() {
     }
 
     if (contrato == 's') {
-
         divMsg.innerHTML += `Obrigado por confiar na Aliança Apis!<br><br>`;
-
-        divMsg.innerHTML += `Você está evitando uma perda de até <b>R$ ${((lucro * 0.3) + reposicao).toFixed(2)}</b>.<br>`;
-
+        divMsg.innerHTML += `Você está evitando uma perda de até <b>R$ ${((lucro * 0.3) + reposicao).toFixed(2)}<br>`;
         divMsg.innerHTML += `Mantendo 100% da produção + reposição de colmeias.<br><br>`;
-
         divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%</b><br>`;
 
     }
     else {
 
         if (kilos < 45) {
-            divMsg.innerHTML += `<span style="color:red">Produção abaixo do esperado! Pode haver problemas na colmeia.</span><br><br>`;
+            divMsg.innerHTML += `<span style="color:red">Produção abaixo do esperado! Pode haver problemas na colmeia.</span><br>`;
         }
 
         if (lucro < 0) {
-            divMsg.innerHTML += `<span style="color:red">Você está tendo prejuízo na produção!</span><br><br>`;
+            divMsg.innerHTML += `<span style="color:red">Você está tendo prejuízo na produção!</span><br>`;
         }
-
-        divMsg.innerHTML += `Sem o serviço, você pode deixar de ganhar <b>R$ ${(lucro * 0.3).toFixed(2)}</b>.<br>`;
-
-        divMsg.innerHTML += `Além disso, terá um custo de reposição de <b>R$ ${reposicao.toFixed(2)}</b>.<br><br>`;
-
-        divMsg.innerHTML += `Nosso serviço custaria <b>R$ ${custoTotal.toFixed(2)}</b>.<br>`;
-
-        divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%</b>`;
+        divMsg.innerHTML += `Sem o serviço, você pode deixar de ganhar <b>R$ ${(lucro * 0.3).toFixed(2)}<br>`;
+        divMsg.innerHTML += `Além disso, terá um custo de reposição de <b>R$ ${reposicao.toFixed(2)}<br>`;
+        divMsg.innerHTML += `Nosso serviço custaria <b>R$ ${custoTotal.toFixed(2)}<br>`;
+        divMsg.innerHTML += `ROI estimado: <b>${roi.toFixed(0)}%<br><br>`;        
+        divMsg.innerHTML += `<button class="btn_secundarioCinza" href="https://aliancaapis.atlassian.net/servicedesk/customer/portal/1" style="width: 100%; background-color: #FAF8EB;">Contrate Já!</button>`;
     }
 }
